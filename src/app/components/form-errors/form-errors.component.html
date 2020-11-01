@@ -1,0 +1,12 @@
+<mat-error *ngIf="form.hasError('required',controlName)">
+  Pole jest wymagane
+</mat-error>
+<mat-error *ngIf="form.hasError('minlength',controlName)">
+  Minimalna długość to {{ form.controls[controlName].errors['minlength']['requiredLength'] }}
+</mat-error>
+<mat-error *ngIf="form.hasError('maxlength',controlName)">
+  Maksymalna długość to {{ form.controls[controlName].errors['maxlength']['requiredLength'] }}
+</mat-error>
+<mat-error *ngIf="form.hasError('email',controlName)">
+  Nieprawidłowy adres email
+</mat-error>

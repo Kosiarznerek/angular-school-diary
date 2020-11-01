@@ -1,0 +1,68 @@
+<!-- Background -->
+<div class="background"></div>
+
+<!-- Container -->
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+
+      <!-- Title -->
+      <h1 class="mat-display-2">Dziennik&nbsp;szkolny</h1>
+
+      <!-- Sign in card -->
+      <mat-card [formGroup]="signInForm">
+
+        <!-- Header -->
+        <div class="card-header">
+          <i class="material-icons">account_circle</i>
+          <h1 class="mat-h1">Logowanie</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="card-body mb-2">
+          <mat-form-field>
+            <mat-label>Login</mat-label>
+            <input matInput type="text" [formControlName]="'login'" placeholder="Wpisz swój login">
+            <mat-error>
+              <app-form-errors [form]="signInForm" [controlName]="'login'"></app-form-errors>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Hasło</mat-label>
+            <input matInput type="password" [formControlName]="'password'" placeholder="Wpisz swóje hasło">
+            <mat-error>
+              <app-form-errors [form]="signInForm" [controlName]="'password'"></app-form-errors>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Typ logowania</mat-label>
+            <mat-select [formControlName]="'type'">
+              <mat-option [value]="'student'">Uczeń</mat-option>
+              <mat-option [value]="'parent'">Rodzic</mat-option>
+              <mat-option [value]="'teacher'">Nauczyciel</mat-option>
+              <mat-option [value]="'administrator'">Administrator</mat-option>
+            </mat-select>
+            <mat-error>
+              <app-form-errors [form]="signInForm" [controlName]="'type'"></app-form-errors>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer row mt-3">
+          <div class="col-12 d-flex">
+            <button [disabled]="signInForm.invalid || signInForm.disabled" (click)="onSignInButtonClickHandler()"
+                    type="button" color="primary"
+                    class="flex-fill" mat-raised-button>
+              Zaloguj
+            </button>
+          </div>
+        </div>
+
+      </mat-card>
+      <!-- /Sign in card -->
+
+    </div>
+  </div>
+</div>
+<!-- /Container -->
