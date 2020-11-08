@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ISignInDto, SignInService} from '../../services/sign-in/sign-in.service';
+import {SignInService} from '../../services/sign-in/sign-in.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ISignInDto} from '../../services/sign-in/sign-in.service.models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,6 +18,7 @@ export class SignInComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly signInService: SignInService,
     private readonly matSnackBar: MatSnackBar,
+    private readonly router: Router,
   ) {
 
     const signInForm: Record<keyof ISignInDto, any> = {
@@ -39,7 +42,7 @@ export class SignInComponent implements OnInit {
     this.signInForm.enable();
 
     if (isSuccess) {
-      // TODO
+      await this.router.navigate([model.type]);
     } else {
       this.matSnackBar.open('Błąd podczas logowania.');
     }

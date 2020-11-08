@@ -10,6 +10,18 @@ const routes: Routes = [
     path: 'administrator',
     loadChildren: () => import('./views/administrator/administrator.module').then(r => r.AdministratorModule)
   },
+  {
+    path: 'student',
+    loadChildren: () => import('./views/student/student.module').then(r => r.StudentModule)
+  },
+  {
+    path: 'parent',
+    loadChildren: () => import('./views/parent/parent.module').then(r => r.ParentModule)
+  },
+  {
+    path: 'teacher',
+    loadChildren: () => import('./views/teacher/teacher.module').then(r => r.TeacherModule)
+  },
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found'},
 ];

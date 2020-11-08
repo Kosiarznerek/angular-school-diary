@@ -1,12 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
-
-export interface ISignInDto {
-  login: string;
-  password: string;
-  type: 'student' | 'parent' | 'teacher' | 'administrator';
-}
+import {ISignInDto} from './sign-in.service.models';
 
 @Injectable({
   providedIn: 'root'
