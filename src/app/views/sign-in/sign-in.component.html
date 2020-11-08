@@ -22,7 +22,8 @@
         <div class="card-body mb-2">
           <mat-form-field>
             <mat-label>Login</mat-label>
-            <input matInput type="text" [formControlName]="'login'" placeholder="Wpisz swój login">
+            <input matInput [autocomplete]="'off'" type="text" [formControlName]="'login'"
+                   placeholder="Wpisz swój login">
             <mat-error>
               <app-form-errors [form]="signInForm" [controlName]="'login'"></app-form-errors>
             </mat-error>
