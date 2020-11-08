@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+table.is-loading::ng-deep tbody {
+  height: 150px;
+  display: block;
+}
+
+.no-data {
+  text-align: center;
+  background: white;
+  padding: 65px 0;
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 30px);
+  justify-content: center;
+}
