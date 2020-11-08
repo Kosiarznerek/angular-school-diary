@@ -1,18 +1,21 @@
 @import "../../../variables";
 
 .sidenav-container {
-  min-height: calc(100% - 64px);
+  min-height: calc(100vh - 64px);
 }
 
 .sidenav {
   width: 300px;
+  height: calc(100vh - 64px);
+  margin-top: 64px;
 }
 
 .sidenav .mat-toolbar {
   background: inherit;
 }
 
-.mat-toolbar.mat-primary {
+mat-toolbar {
+  height: 64px;
   position: sticky;
   top: 0;
   z-index: 2;
@@ -63,5 +66,3 @@ mat-accordion.navigation::ng-deep .mat-expansion-panel:not(.mat-expanded).active
   color: white;
   cursor: context-menu;
 }
-
-

@@ -1,88 +1,89 @@
-<!-- Header -->
-<mat-toolbar color="primary">
+<div class="container-wrapper">
 
-  <button
-    (click)="drawer.toggle()"
-    class="mr-16"
-    aria-label="Toggle sidenav"
-    mat-icon-button
-    type="button">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
+  <!-- Header -->
+  <mat-toolbar color="primary">
 
-  <span class="flex-fill">Dziennik szkolny</span>
+    <button
+      (click)="drawer.toggle()"
+      class="mr-16"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      type="button">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
 
-  <!-- Sign out button click -->
-  <button mat-icon-button (click)="onSignOutButtonClickHandler()">
-    <mat-icon>power_settings_new</mat-icon>
-  </button>
+    <span class="flex-fill">Dziennik szkolny</span>
 
-</mat-toolbar>
+    <!-- Sign out button click -->
+    <button mat-icon-button (click)="onSignOutClickHandler()">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
 
-<!-- Sidenav container -->
-<mat-sidenav-container class="sidenav-container">
+  </mat-toolbar>
 
-  <!-- Side navigation -->
-  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="!(isHandset$ | async)"
-               class="sidenav"
-               fixedInViewport="true">
+  <!-- Sidenav container -->
+  <mat-sidenav-container [hasBackdrop]="false" class="sidenav-container">
 
-    <!-- Title -->
-    <mat-toolbar>Menu</mat-toolbar>
+    <!-- Side navigation -->
+    <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="!(isHandset$ | async)"
+                 class="sidenav"
+                 fixedInViewport="true">
 
-    <!-- Navigation list -->
-    <mat-nav-list>
+      <!-- Navigation list -->
+      <mat-nav-list>
 
-      <ng-template #menuTemplate let-items>
-        <mat-accordion class="navigation">
-          <ng-container *ngFor="let menuItem of items" [ngSwitch]="menuItem.children.length">
-            <mat-expansion-panel *ngSwitchCase="0" [routerLink]="menuItem.routerLink"
-                                 [routerLinkActive]="'active'" [disabled]="true">
-              <mat-expansion-panel-header>
-                <mat-panel-title>{{ menuItem.displayName }}</mat-panel-title>
-              </mat-expansion-panel-header>
-            </mat-expansion-panel>
-            <mat-expansion-panel *ngSwitchDefault>
-              <mat-expansion-panel-header>
-                <mat-panel-title>{{ menuItem.displayName }}</mat-panel-title>
-              </mat-expansion-panel-header>
-              <ng-container *ngTemplateOutlet="menuTemplate; context:{ $implicit: menuItem.children }">
-              </ng-container>
-            </mat-expansion-panel>
-          </ng-container>
-        </mat-accordion>
-      </ng-template>
+        <ng-template #menuTemplate let-items>
+          <mat-accordion class="navigation">
+            <ng-container *ngFor="let menuItem of items" [ngSwitch]="menuItem.children.length">
+              <mat-expansion-panel *ngSwitchCase="0" [routerLink]="menuItem.routerLink"
+                                   [routerLinkActive]="'active'" [disabled]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>{{ menuItem.displayName }}</mat-panel-title>
+                </mat-expansion-panel-header>
+              </mat-expansion-panel>
+              <mat-expansion-panel *ngSwitchDefault>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>{{ menuItem.displayName }}</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-container *ngTemplateOutlet="menuTemplate; context:{ $implicit: menuItem.children }">
+                </ng-container>
+              </mat-expansion-panel>
+            </ng-container>
+          </mat-accordion>
+        </ng-template>
 
-      <ng-container *ngTemplateOutlet="menuTemplate; context:{ $implicit: menuItems }">
-      </ng-container>
+        <ng-container *ngTemplateOutlet="menuTemplate; context:{ $implicit: menuItems }">
+        </ng-container>
 
-    </mat-nav-list>
+      </mat-nav-list>
 
-  </mat-sidenav>
-  <!-- /Side navigation -->
+    </mat-sidenav>
+    <!-- /Side navigation -->
 
-  <!-- Content -->
-  <mat-sidenav-content>
-    <div class="container">
+    <!-- Content -->
+    <mat-sidenav-content>
+      <div class="container">
 
-      <!-- Page title and description -->
-      <ng-container *ngIf="myOutlet.isActivated">
-        <h1 class="mat-display-1">{{ currentMenuItem?.displayName }}</h1>
-        <p>{{ currentMenuItem?.description }}</p>
-        <mat-divider></mat-divider>
-        <br/>
-      </ng-container>
+        <!-- Page title and description -->
+        <ng-container *ngIf="myOutlet.isActivated">
+          <h1 class="mat-display-1">{{ currentMenuItem?.displayName }}</h1>
+          <p>{{ currentMenuItem?.description }}</p>
+          <mat-divider></mat-divider>
+          <br/>
+        </ng-container>
 
-      <!-- Router outlet -->
-      <router-outlet #myOutlet="outlet"></router-outlet>
+        <!-- Router outlet -->
+        <router-outlet #myOutlet="outlet"></router-outlet>
 
-      <!-- Route not selected -->
-      <app-dashboard *ngIf="!myOutlet.isActivated"></app-dashboard>
+        <!-- Route not selected -->
+        <app-dashboard *ngIf="!myOutlet.isActivated"></app-dashboard>
 
-    </div>
-  </mat-sidenav-content>
+      </div>
+    </mat-sidenav-content>
 
-</mat-sidenav-container>
-<!-- /Sidenav container -->
+  </mat-sidenav-container>
+  <!-- /Sidenav container -->
+
+</div>

@@ -9,6 +9,7 @@ interface IMenuItem {
   description: string;
   routerLink: string;
   children: IMenuItem[];
+  hiddenChildren: boolean;
 }
 
 @Component({
@@ -48,14 +49,17 @@ export class NavigationComponent implements OnInit {
     ));
   }
 
-  public onSignOutButtonClickHandler(): void {
+  public onSignOutClickHandler(): void {
     this.router.navigate(['/']);
   }
 
   public get currentMenuItem(): Omit<IMenuItem, 'children'> {
     return NavigationComponent
       .flatMenuItems(this.menuItems)
-      .find(v => v.routerLink === this.router.url);
+      .find(v =>
+        v.routerLink === this.router.url ||
+        v.hiddenChildren && this.router.url.match(new RegExp(`^${v.routerLink}/`))
+      );
   }
 
   private static flatMenuItems(items: IMenuItem[]): Omit<IMenuItem, 'children'>[] {
@@ -75,7 +79,11 @@ export class NavigationComponent implements OnInit {
         displayName: route.data.displayName,
         description: route.data.description,
         routerLink: `${pathFromRoot}/${route.path}`,
-        children: this.toMenuItems(`${pathFromRoot}/${route.path}`, route.children || [])
+        hiddenChildren: route.data?.hiddenChildren ?? false,
+        children: this.toMenuItems(
+          `${pathFromRoot}/${route.path}`,
+          route.children && !route.data?.hiddenChildren ? route.children : []
+        )
       }));
   }
 
