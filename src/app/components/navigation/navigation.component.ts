@@ -6,6 +6,7 @@ import {map, take} from 'rxjs/operators';
 
 interface IMenuItem {
   displayName: string;
+  description: string;
   routerLink: string;
   children: IMenuItem[];
 }
@@ -25,7 +26,6 @@ export class NavigationComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly breakpointObserver: BreakpointObserver,
   ) {
-
     this.menuItems = [];
     this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
       map(result => result.matches)
@@ -48,18 +48,35 @@ export class NavigationComponent implements OnInit {
     ));
   }
 
+  public onSignOutButtonClickHandler(): void {
+    this.router.navigate(['/']);
+  }
+
+  public get currentMenuItem(): Omit<IMenuItem, 'children'> {
+    return NavigationComponent
+      .flatMenuItems(this.menuItems)
+      .find(v => v.routerLink === this.router.url);
+  }
+
+  private static flatMenuItems(items: IMenuItem[]): Omit<IMenuItem, 'children'>[] {
+    return items.reduce((p, c) => {
+      if (c.children.length > 0) {
+        return p.concat(NavigationComponent.flatMenuItems(c.children));
+      } else {
+        return p.concat(c);
+      }
+    }, []);
+  }
+
   private static toMenuItems(pathFromRoot: string, routes: Routes): IMenuItem[] {
     return routes
       .filter(v => v.component || v.children)
-      .map((route, i) => ({
+      .map(route => ({
         displayName: route.data.displayName,
+        description: route.data.description,
         routerLink: `${pathFromRoot}/${route.path}`,
         children: this.toMenuItems(`${pathFromRoot}/${route.path}`, route.children || [])
       }));
-  }
-
-  public onSignOutButtonClickHandler(): void {
-    this.router.navigate(['/']);
   }
 
 }

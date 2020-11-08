@@ -66,8 +66,21 @@
   <!-- Content -->
   <mat-sidenav-content>
     <div class="container">
-      <app-dashboard *ngIf="!myOutlet.isActivated"></app-dashboard>
+
+      <!-- Page title and description -->
+      <ng-container *ngIf="myOutlet.isActivated">
+        <h1 class="mat-display-1">{{ currentMenuItem?.displayName }}</h1>
+        <p>{{ currentMenuItem?.description }}</p>
+        <mat-divider></mat-divider>
+        <br/>
+      </ng-container>
+
+      <!-- Router outlet -->
       <router-outlet #myOutlet="outlet"></router-outlet>
+
+      <!-- Route not selected -->
+      <app-dashboard *ngIf="!myOutlet.isActivated"></app-dashboard>
+
     </div>
   </mat-sidenav-content>
 
