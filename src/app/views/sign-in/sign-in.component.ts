@@ -33,7 +33,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public async onSignInButtonClickHandler(): Promise<void> {
+  public async onSignInClickHandler(): Promise<void> {
     this.signInForm.disable();
 
     const model: ISignInDto = this.signInForm.getRawValue();
