@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>
+  {{ configuration?.header || 'Potwierdzenie wykonania' }}
+</h1>
+
+<div mat-dialog-content>
+  <p>
+    {{ configuration?.content || 'Czy jest pewien wykonywanej akcji?' }}
+  </p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button class="flex-fill" [mat-dialog-close]="true">
+    Tak
+  </button>
+  <button mat-button class="flex-fill" [mat-dialog-close]="false">
+    Nie
+  </button>
+</div>

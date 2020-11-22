@@ -3,9 +3,12 @@ import {Routes, RouterModule} from '@angular/router';
 import {NavigationComponent} from '../../components/navigation/navigation.component';
 import {UsersTableComponent} from './users-table/users-table.component';
 import {UsersDetailsComponent} from './users-details/users-details.component';
-import {UsersAddComponent} from './users-add/users-add.component';
 import {SubjectsTableComponent} from './subjects-table/subjects-table.component';
 import {SubjectsAddComponent} from './subjects-add/subjects-add.component';
+import {UsersTableResolver} from './users-table/users-table.resolver';
+import {UsersDetailsResolver} from './users-details/users-details.resolver';
+import {UsersFormComponent} from './users-form/users-form.component';
+import {UsersFormResolver} from './users-form/users-form.resolver';
 
 const routes: Routes = [
   {
@@ -17,9 +20,26 @@ const routes: Routes = [
           description: 'Tutaj możesz zarządzać kontami użytkowników.'
         }, children: [
           {path: '', pathMatch: 'full', redirectTo: 'table'},
-          {path: 'table', component: UsersTableComponent},
-          {path: ':id/details', component: UsersDetailsComponent},
-          {path: 'add', component: UsersAddComponent},
+          {
+            path: 'table', component: UsersTableComponent, resolve: {
+              users: UsersTableResolver,
+            }
+          },
+          {
+            path: ':id/details', component: UsersDetailsComponent, resolve: {
+              details: UsersDetailsResolver,
+            }
+          },
+          {
+            path: ':id/form', component: UsersFormComponent, resolve: {
+              data: UsersFormResolver,
+            }
+          },
+          {
+            path: 'form', component: UsersFormComponent, resolve: {
+              data: UsersFormResolver,
+            }
+          },
         ]
       },
       {

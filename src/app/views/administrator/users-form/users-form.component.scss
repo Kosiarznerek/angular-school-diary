@@ -1,0 +1,11 @@
+mat-form-field {
+  width: 100%;
+}
+
+mat-list-item {
+  height: initial !important;
+}
+
+mat-list-item::ng-deep .mat-list-item-content {
+  padding: 0 !important;
+}

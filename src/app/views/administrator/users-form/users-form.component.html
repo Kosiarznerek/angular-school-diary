@@ -1,0 +1,162 @@
+<mat-horizontal-stepper [linear]="true" class="mb-2">
+
+  <mat-step [stepControl]="accountForm">
+    <form [formGroup]="accountForm">
+      <ng-template matStepLabel>Konto użytkownika</ng-template>
+      <mat-form-field>
+        <mat-label>Login</mat-label>
+        <input matInput [autocomplete]="'off'" type="text" [formControlName]="'login'"
+               placeholder="Wpisz login">
+        <mat-error>
+          <app-form-errors [form]="accountForm" [controlName]="'login'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="!isEditMode">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" [formControlName]="'password'" placeholder="Wpisz hasło">
+        <mat-error>
+          <app-form-errors [form]="accountForm" [controlName]="'password'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Typ konta</mat-label>
+        <mat-select [formControlName]="'accountType'">
+          <mat-option [value]="'student'">Uczeń</mat-option>
+          <mat-option [value]="'parent'">Rodzic</mat-option>
+          <mat-option [value]="'teacher'">Nauczyciel</mat-option>
+          <mat-option [value]="'administrator'">Administrator</mat-option>
+        </mat-select>
+        <mat-error>
+          <app-form-errors [form]="accountForm" [controlName]="'type'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext class="w-100">Dalej</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="detailsForm">
+    <ng-template matStepLabel>Dane szczegółowe</ng-template>
+    <form [formGroup]="detailsForm" *ngIf="accountForm.get('accountType').value as accountType">
+      <mat-form-field>
+        <mat-label>Imię</mat-label>
+        <input matInput [autocomplete]="'off'" type="text" [formControlName]="'name'" placeholder="Wpisz imię">
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'name'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nazwisko</mat-label>
+        <input matInput [autocomplete]="'off'" type="text" [formControlName]="'surname'" placeholder="Wpisz nazwisko">
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'surname'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="accountType !== 'administrator'">
+        <mat-label>Adres</mat-label>
+        <input matInput [autocomplete]="'off'" type="text" [formControlName]="'address'" placeholder="Wpisz adres">
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'address'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="accountType !== 'administrator'">
+        <mat-label>Telefon</mat-label>
+        <input matInput [autocomplete]="'off'" type="text" [formControlName]="'phone'" placeholder="Wpisz telefon">
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'phone'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="accountType !== 'administrator'">
+        <mat-label>Email</mat-label>
+        <input matInput [autocomplete]="'off'" type="email" [formControlName]="'email'" placeholder="Wpisz email">
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'email'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="accountType === 'student'">
+        <mat-select [formControlName]="'parentIds'" [multiple]="true" placeholder="Wybierz rodziców">
+          <mat-option>
+            <ngx-mat-select-search [formControl]="parentsFilterControl"
+                                   [placeholderLabel]="'Szukaj'" [noEntriesFoundLabel]="'Brak rezultatów'"
+                                   [indexAndLengthScreenReaderText]="' z '">
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let parent of filteredParents | async" [value]="parent.id">
+            {{ parent.name }} {{ parent.surname }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'parentIds'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="accountType === 'parent'">
+        <mat-select [formControlName]="'childrenIds'" [multiple]="true" placeholder="Wybierz dzieci">
+          <mat-option>
+            <ngx-mat-select-search [formControl]="childrenFilterControl"
+                                   [placeholderLabel]="'Szukaj'" [noEntriesFoundLabel]="'Brak rezultatów'"
+                                   [indexAndLengthScreenReaderText]="' z '">
+            </ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let child of filteredChildren | async" [value]="child.id">
+            {{ child.name }} {{ child.surname }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <app-form-errors [form]="detailsForm" [controlName]="'childrenIds'"></app-form-errors>
+        </mat-error>
+      </mat-form-field>
+      <ng-container *ngIf="accountType === 'teacher'">
+        <mat-list [formArrayName]="'subjects'">
+          <mat-list-item *ngFor="let formGroup of detailsForm.get('subjects')['controls']; let i = index"
+                         [formGroup]="formGroup">
+            <mat-form-field class="mr-2">
+              <mat-label>Nazwa przedmiotu</mat-label>
+              <mat-select [formControlName]="'subjectId'" (selectionChange)="formGroup.get('profile').setValue(null)">
+                <mat-option *ngFor="let subject of getTeacherSubjectsList(i)" [value]="subject.id">
+                  {{ subject.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                <app-form-errors [form]="formGroup" [controlName]="'subjectId'"></app-form-errors>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Profil nauczania</mat-label>
+              <mat-select [formControlName]="'profile'">
+                <mat-option *ngFor="let profile of getTeachersProfilesList(i)" [value]="profile">
+                  <ng-container [ngSwitch]="profile">
+                    <ng-container *ngSwitchCase="'basic'">Podstawowy</ng-container>
+                    <ng-container *ngSwitchCase="'advanced'">Zaawansowany</ng-container>
+                    <ng-container *ngSwitchDefault>Nieznany profil</ng-container>
+                  </ng-container>
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                <app-form-errors [form]="formGroup" [controlName]="'profile'"></app-form-errors>
+              </mat-error>
+            </mat-form-field>
+            <button type="button" mat-icon-button color="primary" (click)="onDeleteTeacherSubject(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+        <button type="button" mat-button class="w-100" (click)="onAddTeacherSubjectClickHandler()">
+          Dodaj przedmiot nauczający
+        </button>
+      </ng-container>
+      <div class="d-flex">
+        <button mat-button matStepperPrevious class="flex-fill">Wróć</button>
+        <button mat-button class="flex-fill" [disabled]="!isFormValid && accountForm.enabled && detailsForm.enabled"
+                (click)="onFormSaveClickHandler()">
+          Zapisz
+        </button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<button mat-raised-button color="primary" class="w-100" (click)="navigateToUsersTable()">
+  Powrót
+</button>

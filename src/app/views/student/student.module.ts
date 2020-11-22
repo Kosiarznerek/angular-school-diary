@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StudentRoutingModule} from './student-routing.module';
-import {AppMaterialModule} from '../../app.material.module';
+import {AppSharedModule} from '../../app.shared.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    AppMaterialModule,
+    AppSharedModule,
     StudentRoutingModule,
   ]
 })

@@ -1,1 +1,55 @@
-<p>users-details works!</p>
+<mat-list class="mb-2">
+  <mat-list-item>
+    <span class="w-100">Login</span>
+    <span class="w-100">{{ details.login }}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <span class="w-100">Typ konta</span>
+    <span class="w-100">
+      <ng-container [ngSwitch]="details.accountType">
+        <ng-container *ngSwitchCase="'student'">Uczeń</ng-container>
+        <ng-container *ngSwitchCase="'parent'">Rodzic</ng-container>
+        <ng-container *ngSwitchCase="'teacher'">Nauczyciel</ng-container>
+        <ng-container *ngSwitchCase="'administrator'">Administrator</ng-container>
+        <ng-container *ngSwitchDefault>Nieznany</ng-container>
+      </ng-container>
+    </span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <span class="w-100">Imię</span>
+    <span class="w-100">{{ details.name }}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <span class="w-100">Nazwisko</span>
+    <span class="w-100">{{ details.surname }}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <span class="w-100">Adres</span>
+    <span class="w-100">{{ details.address }}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <span class="w-100">Telefon</span>
+    <span class="w-100">{{ details.phone }}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+
+  <mat-list-item>
+    <span class="w-100">Email</span>
+    <span class="w-100">{{ details.email }}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+
+<button mat-raised-button color="primary" class="w-100" (click)="onBackClickHandler()">
+  Powrót
+</button>

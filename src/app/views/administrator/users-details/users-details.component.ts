@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {IUserDetailsData} from '../../../services/users/users.service.models';
 
 @Component({
   selector: 'app-users-details',
@@ -7,10 +9,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UsersDetailsComponent implements OnInit {
 
-  constructor() {
+  public details: IUserDetailsData;
+
+  constructor(
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
+  ) {
   }
 
   ngOnInit(): void {
+    this.details = this.activatedRoute.snapshot.data.details;
+  }
+
+  public async onBackClickHandler(): Promise<void> {
+    await this.router.navigate(['../../table'], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
 }

@@ -1,0 +1,25 @@
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
+interface IConfiguration {
+  header?: string;
+  content?: string;
+}
+
+@Component({
+  selector: 'app-confirm-dialog',
+  templateUrl: './confirm-dialog.component.html',
+  styleUrls: ['./confirm-dialog.component.scss']
+})
+export class ConfirmDialogComponent implements OnInit {
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public configuration: IConfiguration,
+    private readonly dialogRef: MatDialogRef<ConfirmDialogComponent>,
+  ) {
+  }
+
+  ngOnInit(): void {
+  }
+
+}

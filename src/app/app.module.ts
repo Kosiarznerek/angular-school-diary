@@ -6,23 +6,21 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SignInComponent} from './views/sign-in/sign-in.component';
 import {NotFoundComponent} from './views/not-found/not-found.component';
-import {AppMaterialModule} from './app.material.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {FormErrorsComponent} from './components/form-errors/form-errors.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {AppSharedModule} from './app.shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     NotFoundComponent,
-    FormErrorsComponent,
     NavigationComponent,
     DashboardComponent,
   ],
   imports: [
-    AppMaterialModule,
+    AppSharedModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
