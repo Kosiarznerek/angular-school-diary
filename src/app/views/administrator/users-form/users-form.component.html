@@ -67,7 +67,7 @@
           <app-form-errors [form]="detailsForm" [controlName]="'phone'"></app-form-errors>
         </mat-error>
       </mat-form-field>
-      <mat-form-field *ngIf="accountType !== 'administrator'">
+      <mat-form-field *ngIf="accountType !== 'administrator' && accountType !== 'student'">
         <mat-label>Email</mat-label>
         <input matInput [autocomplete]="'off'" type="email" [formControlName]="'email'" placeholder="Wpisz email">
         <mat-error>

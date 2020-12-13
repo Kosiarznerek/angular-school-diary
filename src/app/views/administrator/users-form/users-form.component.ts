@@ -38,7 +38,8 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     this.onDestroy = new Subject();
 
     this.accountForm = this.formBuilder.group({
-      login: [null, Validators.required],
+      id: null,
+      login: new FormControl({value: null, disabled: this.isEditMode}, Validators.required),
       password: [null, this.isEditMode ? null : Validators.required],
       accountType: new FormControl({value: null, disabled: this.isEditMode}, Validators.required),
     });
@@ -47,10 +48,14 @@ export class UsersFormComponent implements OnInit, OnDestroy {
       name: [null, Validators.required],
       surname: [null, Validators.required],
       address: [null, this.validateForAccountTypes(['student', 'parent', 'teacher'], Validators.required)],
-      phone: [null, this.validateForAccountTypes(['student', 'parent', 'teacher'], Validators.required)],
-      email: [null, this.validateForAccountTypes(['student', 'parent', 'teacher'], [
+      phone: [null, this.validateForAccountTypes(['student', 'parent', 'teacher'], [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(11),
+      ])],
+      email: [null, this.validateForAccountTypes(['parent', 'teacher'], [
         Validators.email,
-        Validators.required
+        Validators.required,
       ])],
       parentIds: [[]],
       childrenIds: [[]],
@@ -206,7 +211,9 @@ export class UsersFormComponent implements OnInit, OnDestroy {
 
     this.accountForm.disable();
     this.detailsForm.disable();
-    const isSuccess = await this.usersService.update(model).toPromise();
+    const isSuccess = this.isEditMode
+      ? await this.usersService.update(model).toPromise()
+      : await this.usersService.insert(model).toPromise();
     this.accountForm.enable();
     this.detailsForm.enable();
 

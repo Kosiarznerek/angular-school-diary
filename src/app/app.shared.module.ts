@@ -3,6 +3,7 @@ import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog
 import {FormErrorsComponent} from './components/form-errors/form-errors.component';
 import {AppMaterialModule} from './app.material.module';
 import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 
 const sharedComponents = [
   ConfirmDialogComponent,
@@ -14,6 +15,7 @@ const sharedComponents = [
   imports: [
     CommonModule,
     AppMaterialModule,
+    HttpClientModule,
   ],
   exports: [
     ...sharedComponents,

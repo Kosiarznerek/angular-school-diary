@@ -14,12 +14,13 @@ export interface IUserBaseData {
 }
 
 export interface IUserDetailsData extends IUserBaseData {
-  address?: string;
-  phone?: string;
-  email?: string;
-  parentIds?: number[];
-  childrenIds?: number[];
-  subjects?: Array<{
+  password: string;
+  address: string;
+  phone: string;
+  email: string;
+  parentIds: number[];
+  childrenIds: number[];
+  subjects: Array<{
     subjectId: number;
     profile: 'basic' | 'advanced'
   }>;
