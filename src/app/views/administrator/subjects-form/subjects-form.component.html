@@ -1,0 +1,20 @@
+<form [formGroup]="subjectForm">
+
+  <mat-form-field>
+    <mat-label>Nazwa przedmiotu</mat-label>
+    <input matInput [autocomplete]="'off'" type="text" [formControlName]="'name'" placeholder="Wpisz nazwę">
+    <mat-error>
+      <app-form-errors [form]="subjectForm" [controlName]="'name'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="subjectForm.invalid"
+          (click)="onSubjectSaveButtonClickHandler()">
+    Zapisz
+  </button>
+
+  <button mat-stroked-button color="primary" (click)="onReturnButtonClick()">
+    Powrót
+  </button>
+
+</form>

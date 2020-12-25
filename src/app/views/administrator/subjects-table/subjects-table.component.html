@@ -1,1 +1,25 @@
-<p>subjects-table works!</p>
+<button mat-raised-button color="primary" (click)="onSubjectAddButtonClick()">
+  Dodaj nowy przedmiot
+</button>
+
+<mat-card *ngIf="subjects === null">
+  Trwa ładowanie listy przedmiotów
+</mat-card>
+
+<mat-card *ngIf="subjects?.length === 0">
+  Brak dostępnych przedmiotów
+</mat-card>
+
+<mat-card *ngFor="let subject of subjects" class="subject">
+  <div>
+    {{ subject.name }}
+  </div>
+  <div>
+    <button mat-stroked-button color="primary" (click)="onSubjectEditButtonClick(subject)">
+      Edytuj
+    </button>
+    <button mat-stroked-button color="warn" (click)="onSubjectRemoveButtonClick(subject)">
+      Usuń
+    </button>
+  </div>
+</mat-card>

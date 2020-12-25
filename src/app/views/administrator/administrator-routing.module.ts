@@ -4,11 +4,12 @@ import {NavigationComponent} from '../../components/navigation/navigation.compon
 import {UsersTableComponent} from './users-table/users-table.component';
 import {UsersDetailsComponent} from './users-details/users-details.component';
 import {SubjectsTableComponent} from './subjects-table/subjects-table.component';
-import {SubjectsAddComponent} from './subjects-add/subjects-add.component';
 import {UsersTableResolver} from './users-table/users-table.resolver';
 import {UsersDetailsResolver} from './users-details/users-details.resolver';
 import {UsersFormComponent} from './users-form/users-form.component';
 import {UsersFormResolver} from './users-form/users-form.resolver';
+import {SubjectsFormComponent} from './subjects-form/subjects-form.component';
+import {SubjectsFormResolver} from './subjects-form/subjects-form.resolver';
 
 const routes: Routes = [
   {
@@ -50,7 +51,12 @@ const routes: Routes = [
         }, children: [
           {path: '', pathMatch: 'full', redirectTo: 'table'},
           {path: 'table', component: SubjectsTableComponent},
-          {path: 'add', component: SubjectsAddComponent},
+          {
+            path: ':id/form', component: SubjectsFormComponent, resolve: {
+              data: SubjectsFormResolver
+            }
+          },
+          {path: 'form', component: SubjectsFormComponent},
         ]
       }
     ]
