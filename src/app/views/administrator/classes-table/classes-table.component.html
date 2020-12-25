@@ -1,0 +1,47 @@
+<button mat-raised-button color="primary" (click)="onAddNewClassButtonClick()">
+  Dodaj nową klase
+</button>
+
+<mat-card *ngIf="classesData === null">
+  Trwa ładowanie danych
+</mat-card>
+
+<mat-card *ngIf="classesData?.length === 0">
+  Brak dostępnych klas
+</mat-card>
+
+<mat-card *ngFor="let classData of classesData" class="class-data">
+  <div>
+    <strong>Rok: </strong>
+    <span>{{ classData.year }}</span>
+  </div>
+  <div>
+    <strong>Symbol: </strong>
+    <span>{{ classData.symbol }}</span>
+  </div>
+  <div>
+    <strong>Wychowawca: </strong>
+    <span>{{ classData.tutor.name }} {{ classData.tutor.surname }}</span>
+  </div>
+  <hr/>
+  <div>
+    <strong>Uczniowie: </strong>
+    <span *ngIf="classData.students.length === 0">Brak</span>
+    <span *ngIf="classData.students.length > 0">
+      {{ classData.students[0].name }} {{ classData.students[0].surname }}
+    </span>
+  </div>
+  <ng-container *ngFor="let student of classData.students; let i = index">
+    <div *ngIf="i !== 0" class="student">
+      {{ student.name }} {{ student.surname }}
+    </div>
+  </ng-container>
+  <div class="actions">
+    <button mat-stroked-button color="primary" (click)="onEditClassButtonClick(classData)">
+      Edytuj
+    </button>
+    <button mat-stroked-button color="warn" (click)="onRemoveClassButtonClick(classData)">
+      Usuń
+    </button>
+  </div>
+</mat-card>

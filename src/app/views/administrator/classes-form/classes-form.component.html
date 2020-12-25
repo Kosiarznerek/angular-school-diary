@@ -1,0 +1,66 @@
+<ng-container [formGroup]="classForm">
+
+  <mat-form-field>
+    <mat-label>Rok</mat-label>
+    <mat-select [formControlName]="'year'">
+      <mat-option *ngFor="let year of [1, 2, 3, 4, 5, 6, 7, 8]" [value]="year">
+        {{ year }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="classForm" [controlName]="'year'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Symbol</mat-label>
+    <mat-select [formControlName]="'symbol'">
+      <mat-option *ngFor="let symbol of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']" [value]="symbol">
+        {{ symbol }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="classForm" [controlName]="'symbol'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Wychowawca</mat-label>
+    <mat-select [formControlName]="'tutor'" [compareWith]="personComparisonFunction">
+      <mat-option *ngIf="isEditMode" [value]="activatedRouteData.classData.tutor">
+        {{ activatedRouteData.classData.tutor.name }} {{ activatedRouteData.classData.tutor.surname }}
+      </mat-option>
+      <mat-option *ngFor="let tutor of tutorTeachers" [value]="tutor">
+        {{ tutor.name }} {{ tutor.surname }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="classForm" [controlName]="'tutor'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Uczniowie</mat-label>
+    <mat-select [formControlName]="'students'" [multiple]="true" placeholder="Wybierz uczniów"
+                [compareWith]="personComparisonFunction">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="studentsFilterControl"
+                               [placeholderLabel]="'Szukaj'" [noEntriesFoundLabel]="'Brak rezultatów'"
+                               [indexAndLengthScreenReaderText]="' z '">
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let child of filteredStudents | async" [value]="child">
+        {{ child.name }} {{ child.surname }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="classForm" [controlName]="'students'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+</ng-container>
+
+<button mat-raised-button color="primary" [disabled]="classForm.invalid" (click)="onSaveButtonClick()">
+  Zapisz
+</button>
+<button mat-stroked-button color="primary" (click)="onReturnButtonClick()">
+  Powrót
+</button>

@@ -10,6 +10,9 @@ import {UsersFormComponent} from './users-form/users-form.component';
 import {UsersFormResolver} from './users-form/users-form.resolver';
 import {SubjectsFormComponent} from './subjects-form/subjects-form.component';
 import {SubjectsFormResolver} from './subjects-form/subjects-form.resolver';
+import {ClassesTableComponent} from './classes-table/classes-table.component';
+import {ClassesFormComponent} from './classes-form/classes-form.component';
+import {ClassesFormResolver} from './classes-form/classes-form.resolver';
 
 const routes: Routes = [
   {
@@ -57,6 +60,27 @@ const routes: Routes = [
             }
           },
           {path: 'form', component: SubjectsFormComponent},
+        ]
+      },
+      {
+        path: 'classes', data: {
+          hiddenChildren: true,
+          displayName: 'Klasy',
+          description: 'Tutaj możesz definiować dostępne klasy.'
+        },
+        children: [
+          {path: '', pathMatch: 'full', redirectTo: 'table'},
+          {path: 'table', component: ClassesTableComponent},
+          {
+            path: ':id/form', component: ClassesFormComponent, resolve: {
+              data: ClassesFormResolver
+            }
+          },
+          {
+            path: 'form', component: ClassesFormComponent, resolve: {
+              data: ClassesFormResolver
+            }
+          },
         ]
       }
     ]

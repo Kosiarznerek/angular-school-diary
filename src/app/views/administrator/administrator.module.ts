@@ -8,6 +8,8 @@ import {SubjectsTableComponent} from './subjects-table/subjects-table.component'
 import {SubjectsFormComponent} from './subjects-form/subjects-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppSharedModule} from '../../app.shared.module';
+import { ClassesTableComponent } from './classes-table/classes-table.component';
+import { ClassesFormComponent } from './classes-form/classes-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {AppSharedModule} from '../../app.shared.module';
     SubjectsTableComponent,
     SubjectsFormComponent,
     UsersFormComponent,
+    ClassesTableComponent,
+    ClassesFormComponent,
   ],
   imports: [
     CommonModule,
