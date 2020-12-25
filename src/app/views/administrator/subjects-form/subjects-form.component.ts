@@ -34,11 +34,9 @@ export class SubjectsFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     if (this.isEditMode) {
       this.subjectForm.patchValue(this.activatedRouteData);
     }
-
   }
 
   public get isEditMode(): boolean {
@@ -47,6 +45,14 @@ export class SubjectsFormComponent implements OnInit {
 
   private get activatedRouteData(): ISubject {
     return this.activatedRoute.snapshot.data.data;
+  }
+
+  public async onReturnButtonClick(): Promise<void> {
+    await this.router.navigate([
+      this.isEditMode ? '../../table' : '../table'
+    ], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
   public async onSubjectSaveButtonClickHandler(): Promise<void> {
@@ -65,14 +71,6 @@ export class SubjectsFormComponent implements OnInit {
     } else {
       this.matSnackBar.open('Coś poszło nie tak');
     }
-  }
-
-  public async onReturnButtonClick(): Promise<void> {
-    await this.router.navigate([
-      this.isEditMode ? '../../table' : '../table'
-    ], {
-      relativeTo: this.activatedRoute,
-    });
   }
 
 }
