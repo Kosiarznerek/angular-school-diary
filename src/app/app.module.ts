@@ -10,6 +10,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AppSharedModule} from './app.shared.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthenticationInterceptor} from './authentication/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {AppSharedModule} from './app.shared.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

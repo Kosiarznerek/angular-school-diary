@@ -3,6 +3,7 @@ import {ActivatedRoute, Router, Routes, UrlSegment} from '@angular/router';
 import {forkJoin, Observable} from 'rxjs';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {map, take} from 'rxjs/operators';
+import {SignInService} from '../../services/sign-in/sign-in.service';
 
 interface IMenuItem {
   displayName: string;
@@ -24,6 +25,7 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
+    private readonly signInService: SignInService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly breakpointObserver: BreakpointObserver,
   ) {
@@ -49,8 +51,9 @@ export class NavigationComponent implements OnInit {
     ));
   }
 
-  public onSignOutClickHandler(): void {
-    this.router.navigate(['/']);
+  public async onSignOutClickHandler(): Promise<void> {
+    this.signInService.singOut();
+    await this.router.navigate(['/']);
   }
 
   public get currentMenuItem(): Omit<IMenuItem, 'children'> {
