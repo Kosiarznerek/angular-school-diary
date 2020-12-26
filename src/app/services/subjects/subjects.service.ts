@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ISubject} from './subjects.service.models';
-import {catchError, delay} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({

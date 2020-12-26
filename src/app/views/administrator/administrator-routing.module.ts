@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {NavigationComponent} from '../../components/navigation/navigation.component';
 import {UsersTableComponent} from './users-table/users-table.component';
 import {UsersDetailsComponent} from './users-details/users-details.component';
@@ -13,10 +13,30 @@ import {SubjectsFormResolver} from './subjects-form/subjects-form.resolver';
 import {ClassesTableComponent} from './classes-table/classes-table.component';
 import {ClassesFormComponent} from './classes-form/classes-form.component';
 import {ClassesFormResolver} from './classes-form/classes-form.resolver';
+import {SchedulesClassesComponent} from './schedules-classes/schedules-classes.component';
+import {SchedulesViewComponent} from './schedules-view/schedules-view.component';
+import {SchedulesFormComponent} from './schedules-form/schedules-form.component';
+import {SchedulesFormResolver} from './schedules-form/schedules-form.resolver';
 
 const routes: Routes = [
   {
     path: '', component: NavigationComponent, children: [
+      {
+        path: 'subjects', data: {
+          hiddenChildren: true,
+          displayName: 'Przedmioty',
+          description: 'Tutaj możesz definiować listę dostępnych przedmiotów.'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'table'},
+          {path: 'table', component: SubjectsTableComponent},
+          {
+            path: ':id/form', component: SubjectsFormComponent, resolve: {
+              data: SubjectsFormResolver
+            }
+          },
+          {path: 'form', component: SubjectsFormComponent},
+        ]
+      },
       {
         path: 'users', data: {
           hiddenChildren: true,
@@ -47,22 +67,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'subjects', data: {
-          hiddenChildren: true,
-          displayName: 'Przedmioty',
-          description: 'Tutaj możesz definiować listę dostępnych przedmiotów.'
-        }, children: [
-          {path: '', pathMatch: 'full', redirectTo: 'table'},
-          {path: 'table', component: SubjectsTableComponent},
-          {
-            path: ':id/form', component: SubjectsFormComponent, resolve: {
-              data: SubjectsFormResolver
-            }
-          },
-          {path: 'form', component: SubjectsFormComponent},
-        ]
-      },
-      {
         path: 'classes', data: {
           hiddenChildren: true,
           displayName: 'Klasy',
@@ -82,7 +86,33 @@ const routes: Routes = [
             }
           },
         ]
-      }
+      },
+      {
+        path: 'schedules', data: {
+          hiddenChildren: true,
+          displayName: 'Plany zajęć',
+          description: 'Tutaj możesz definiować plany zajęć dla poszczególnych klas.'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'classes'},
+          {path: 'classes', component: SchedulesClassesComponent},
+          {
+            path: ':classId', children: [
+              {path: '', pathMatch: 'full', redirectTo: 'view'},
+              {path: 'view', component: SchedulesViewComponent},
+              {
+                path: ':scheduleId/form', component: SchedulesFormComponent, resolve: {
+                  data: SchedulesFormResolver
+                }
+              },
+              {
+                path: 'form', component: SchedulesFormComponent, resolve: {
+                  data: SchedulesFormResolver
+                }
+              },
+            ]
+          },
+        ]
+      },
     ]
   }
 ];

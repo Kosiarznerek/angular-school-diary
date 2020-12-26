@@ -8,8 +8,11 @@ import {SubjectsTableComponent} from './subjects-table/subjects-table.component'
 import {SubjectsFormComponent} from './subjects-form/subjects-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppSharedModule} from '../../app.shared.module';
-import { ClassesTableComponent } from './classes-table/classes-table.component';
-import { ClassesFormComponent } from './classes-form/classes-form.component';
+import {ClassesTableComponent} from './classes-table/classes-table.component';
+import {ClassesFormComponent} from './classes-form/classes-form.component';
+import {SchedulesClassesComponent} from './schedules-classes/schedules-classes.component';
+import {SchedulesViewComponent} from './schedules-view/schedules-view.component';
+import {SchedulesFormComponent} from './schedules-form/schedules-form.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { ClassesFormComponent } from './classes-form/classes-form.component';
     UsersFormComponent,
     ClassesTableComponent,
     ClassesFormComponent,
+    SchedulesClassesComponent,
+    SchedulesViewComponent,
+    SchedulesFormComponent,
   ],
   imports: [
     CommonModule,
