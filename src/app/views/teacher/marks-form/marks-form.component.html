@@ -1,0 +1,46 @@
+<ng-container [formGroup]="markForm">
+
+  <mat-form-field>
+    <mat-label>Ocena</mat-label>
+    <mat-select [formControlName]="'mark'">
+      <mat-option *ngFor="let symbol of [1, 2, 3, 4, 5, 6]" [value]="symbol">
+        {{ symbol }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="markForm" [controlName]="'mark'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Waga</mat-label>
+    <mat-select [formControlName]="'weight'">
+      <mat-option *ngFor="let symbol of [1, 2, 3]" [value]="symbol">
+        {{ symbol }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="markForm" [controlName]="'weight'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Komentarz</mat-label>
+    <mat-select [formControlName]="'comment'">
+      <mat-option *ngFor="let symbol of ['Sprawdzian', 'Kartkówka', 'Odpowiedź ustna']" [value]="symbol">
+        {{ symbol }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="markForm" [controlName]="'comment'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+</ng-container>
+
+<button mat-raised-button color="primary" [disabled]="markForm.invalid" (click)="onSaveButtonClick()">
+  Zapisz
+</button>
+<button mat-stroked-button color="primary" (click)="onReturnButtonClick()">
+  Powrót
+</button>

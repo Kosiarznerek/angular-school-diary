@@ -1,0 +1,67 @@
+<button class="w-100 mb-2" mat-raised-button color="primary" [routerLink]="'../'">
+  Powrót
+</button>
+
+<mat-card *ngIf="marks === null">
+  Trwa ładowanie danych
+</mat-card>
+
+<div class="row">
+  <div class="col-12 mb-5" *ngFor="let student of marks">
+
+    <mat-card>
+      <div class="row">
+        <div class="col-8">
+          <h2>{{ student.studentName }} {{ student.studentSurname }}</h2>
+        </div>
+        <div class="col-4">
+          <button class="w-100" mat-stroked-button color="primary" (click)="onMarkAddButtonClick(student)">
+            Dodaj ocene
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <div class="row" *ngIf="student.marks.length == 0">
+      <div class="col-12 mt-2">
+        <mat-card>Brak ocen</mat-card>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="student.marks.length > 0">
+      <div class="col-md-6 mt-2" *ngFor="let mark of student.marks">
+        <mat-card>
+          <div class="row">
+            <strong class="col-6">Ocena</strong>
+            <div class="col-6">{{ mark.mark }}</div>
+          </div>
+          <div class="row">
+            <strong class="col-6">Waga</strong>
+            <div class="col-6">{{ mark.weight }}</div>
+          </div>
+          <div class="row">
+            <strong class="col-6">Data wystawienia</strong>
+            <div class="col-6">{{ mark.dateOfIssue | date: 'd/M/yy' }}</div>
+          </div>
+          <div class="row">
+            <strong class="col-6">Data komentarz</strong>
+            <div class="col-6">{{ mark.comment }}</div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <button mat-stroked-button color="primary" class="w-100" (click)="onMarkEditButtonClick(student, mark)">
+                Edytuj
+              </button>
+            </div>
+            <div class="col-6">
+              <button mat-stroked-button color="warn" class="w-100" (click)="onMarkRemoveButtonClick(mark)">
+                Usuń
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+

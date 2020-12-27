@@ -1,0 +1,19 @@
+mat-card.class-data {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(50% - 10px);
+  float: left;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+}
+
+mat-card.class-data:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+mat-card.class-data:nth-child(odd) {
+  margin-right: 10px;
+}

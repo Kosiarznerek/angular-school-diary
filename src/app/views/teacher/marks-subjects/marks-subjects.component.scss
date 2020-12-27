@@ -1,0 +1,33 @@
+button {
+  display: block;
+  width: 100%;
+}
+
+mat-card {
+  margin-top: 10px;
+}
+
+mat-card.schedule {
+
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+  float: left;
+  width: calc(50% - 5px);
+
+  &:nth-child(even) {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  > div {
+    display: flex;
+
+    strong {
+      flex: 1;
+    }
+  }
+
+}

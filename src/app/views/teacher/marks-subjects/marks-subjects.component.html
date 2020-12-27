@@ -1,0 +1,52 @@
+<button mat-raised-button color="primary" (click)="onReturnButtonClick()">
+  Powrót
+</button>
+
+<mat-card *ngIf="subjects === null">
+  Trwa ładowanie przedmiotów
+</mat-card>
+
+<mat-card *ngIf="subjects?.length === 0">
+  Nie nauczasz przedmiotów w tej klasie
+</mat-card>
+
+<mat-card *ngFor="let schedule of subjects" class="schedule" [routerLink]="'./' + schedule.id">
+  <div>
+    <strong>Przedmiot: </strong>
+    <span>
+      {{ schedule.subjectName }}
+      (<ng-container [ngSwitch]="schedule.subjectProfile">
+        <ng-container *ngSwitchCase="'Basic'">podstawowy</ng-container>
+        <ng-container *ngSwitchCase="'Advanced'">rozszerzony</ng-container>
+        <ng-container *ngSwitchDefault>nieznany</ng-container>
+      </ng-container>)
+    </span>
+  </div>
+  <div>
+    <strong>Dzień tygodnia: </strong>
+    <span>
+      <ng-container [ngSwitch]="schedule.dayOfWeek">
+        <ng-container *ngSwitchCase="'Monday'">Poniedziałek</ng-container>
+        <ng-container *ngSwitchCase="'Tuesday'">Wtorek</ng-container>
+        <ng-container *ngSwitchCase="'Wednesday'">Środa</ng-container>
+        <ng-container *ngSwitchCase="'Thursday'">Czwartek</ng-container>
+        <ng-container *ngSwitchCase="'Friday'">Piątek</ng-container>
+        <ng-container *ngSwitchCase="'Saturday'">Sobota</ng-container>
+        <ng-container *ngSwitchCase="'Sunday'">Niedziela</ng-container>
+        <ng-container *ngSwitchDefault>nieznany</ng-container>
+      </ng-container>
+    </span>
+  </div>
+  <div>
+    <strong>Numer sali</strong>
+    <span>{{ schedule.roomNumber }}</span>
+  </div>
+  <div>
+    <strong>Godziny trwania</strong>
+    <span>{{ schedule.hourStart}} - {{ schedule.hourEnd }}</span>
+  </div>
+  <div>
+    <strong>Data trwania</strong>
+    <span>{{ schedule.dateStart}} - {{ schedule.dateEnd }}</span>
+  </div>
+</mat-card>
