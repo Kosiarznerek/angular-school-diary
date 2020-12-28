@@ -1,0 +1,25 @@
+<button mat-raised-button color="primary" [routerLink]="'../'">Powrót</button>
+<button mat-raised-button color="primary" [routerLink]="'./form'">Dodaj zajęcia</button>
+
+<mat-card *ngIf="lessons === null">
+  Trwa ładowanie zajęć
+</mat-card>
+
+<mat-card *ngIf="lessons?.length === 0">
+  Brak dostępnych zajęć
+</mat-card>
+
+<div class="row">
+  <div class="col-md-6 mb-2" *ngFor="let lesson of lessons">
+    <mat-card class="lesson" [routerLink]="'./' + lesson.lessonId + '/details'">
+      <div class="row">
+        <strong class="col-6">Temat zajęć</strong>
+        <span class="col-6">{{ lesson.topic }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Data odbycia</strong>
+        <span class="col-6">{{ lesson.date }}</span>
+      </div>
+    </mat-card>
+  </div>
+</div>

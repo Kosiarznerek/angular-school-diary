@@ -1,0 +1,14 @@
+button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+mat-card.lesson {
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+}
+
+mat-card.lesson:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

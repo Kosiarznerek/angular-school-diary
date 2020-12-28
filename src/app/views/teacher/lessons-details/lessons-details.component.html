@@ -1,0 +1,30 @@
+<button mat-raised-button color="primary" [routerLink]="'./../../'">Powrót</button>
+
+<mat-card *ngIf="details === null">
+  Trwa ładowanie szczegółow
+</mat-card>
+
+<ng-container *ngIf="details !== null">
+  <mat-card>
+    <div class="row">
+      <strong class="col-6">Temat zajęć</strong>
+      <span class="col-6">{{ details.topic }}</span>
+    </div>
+  </mat-card>
+  <mat-card>
+    <div class="row">
+      <strong class="col-6">Data odbycia</strong>
+      <span class="col-6">{{ details.date }}</span>
+    </div>
+  </mat-card>
+  <mat-card>
+    <div class="row" *ngFor="let student of details.students">
+      <strong class="col-6">{{ student.studentName }} {{ student.studentSurname }}</strong>
+      <span class="col-6">{{ student.isPresent ? 'Obecny' : 'Nie obecny' }}</span>
+    </div>
+  </mat-card>
+</ng-container>
+
+<button mat-stroked-button color="primary" *ngIf="details !== null" [routerLink]="'../form'">
+  Edytuj
+</button>

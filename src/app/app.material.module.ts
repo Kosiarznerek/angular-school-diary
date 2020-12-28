@@ -16,6 +16,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const material = [
   MatCardModule,
@@ -35,6 +36,7 @@ const material = [
   MatStepperModule,
   MatFormFieldModule,
   NgxMatSelectSearchModule,
+  MatCheckboxModule,
 ];
 
 function polishRangeLabel(page: number, pageSize: number, length: number): string {

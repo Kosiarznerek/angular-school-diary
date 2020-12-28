@@ -1,0 +1,48 @@
+<button mat-raised-button color="primary" [routerLink]="this.isEditMode ? './../details' : '../'">
+  Powrót
+</button>
+
+<ng-container [formGroup]="lessonForm">
+  <mat-form-field>
+    <mat-label>Temat zajęć</mat-label>
+    <input matInput [autocomplete]="'off'" type="text" [formControlName]="'topic'"
+           placeholder="Wpisz temat zajęć">
+    <mat-error>
+      <app-form-errors [form]="lessonForm" [controlName]="'topic'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Data zajęć</mat-label>
+    <input matInput [autocomplete]="'off'" type="date" [formControlName]="'date'"
+           placeholder="Wpisz datę zajęć">
+    <mat-error>
+      <app-form-errors [form]="lessonForm" [controlName]="'date'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <ng-container *ngFor="let presentForm of lessonForm.controls.students['controls']; let i = index"
+                [formArrayName]="'students'">
+    <div class="row" [formGroup]="presentForm">
+      <div class="col-5">
+        <mat-form-field>
+          <mat-label>Imię</mat-label>
+          <input matInput type="text" [formControlName]="'studentName'">
+        </mat-form-field>
+      </div>
+      <div class="col-5">
+        <mat-form-field>
+          <mat-label>Nazwisko</mat-label>
+          <input matInput type="text" [formControlName]="'studentSurname'">
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-checkbox [formControlName]="'isPresent'">Obecny</mat-checkbox>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<button mat-raised-button color="primary" [disabled]="lessonForm.invalid" (click)="onFormSaveButtonClick()">
+  Zapisz
+</button>
