@@ -1,0 +1,29 @@
+<button mat-raised-button color="primary" class="w-100 mb-4" [routerLink]="this.isEditMode ? '../../view' : '../view'">
+  Powrót
+</button>
+
+<ng-container [formGroup]="noteForm">
+  <mat-form-field>
+    <mat-label>Student</mat-label>
+    <mat-select [formControlName]="'studentId'">
+      <mat-option *ngFor="let symbol of students" [value]="symbol.id">
+        {{ symbol.name }} {{ symbol.surname }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="noteForm" [controlName]="'studentId'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Treść uwagi</mat-label>
+    <textarea matInput [formControlName]="'content'" placeholder="Wpisz treść uwagi"></textarea>
+    <mat-error>
+      <app-form-errors [form]="noteForm" [controlName]="'date'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+</ng-container>
+
+<button mat-raised-button color="primary" class="w-100 mt-2" [disabled]="noteForm.invalid"
+        (click)="onSaveButtonClick()">
+  Zapisz
+</button>

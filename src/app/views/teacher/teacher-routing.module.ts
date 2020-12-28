@@ -12,6 +12,9 @@ import {LessonsViewComponent} from './lessons-view/lessons-view.component';
 import {LessonsDetailsComponent} from './lessons-details/lessons-details.component';
 import {LessonsFormComponent} from './lessons-form/lessons-form.component';
 import {LessonsFormResolver} from './lessons-form/lessons-form.resolver';
+import {NotesViewComponent} from './notes-view/notes-view.component';
+import {NotesFormComponent} from './notes-form/notes-form.component';
+import {NotesFormResolver} from './notes-form/notes-form.resolver';
 
 const routes: Routes = [
   {
@@ -57,6 +60,26 @@ const routes: Routes = [
           {
             path: 'classes/:classId/:scheduleId/:lessonId/form', component: LessonsFormComponent, resolve: {
               data: LessonsFormResolver,
+            }
+          },
+        ]
+      },
+      {
+        path: 'notes', data: {
+          hiddenChildren: true,
+          displayName: 'Uwagi',
+          description: 'Tutaj możesz zarządzać uwagami studentów'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'view'},
+          {path: 'view', component: NotesViewComponent},
+          {
+            path: 'form', component: NotesFormComponent, resolve: {
+              data: NotesFormResolver,
+            }
+          },
+          {
+            path: ':noteId/form', component: NotesFormComponent, resolve: {
+              data: NotesFormResolver,
             }
           },
         ]

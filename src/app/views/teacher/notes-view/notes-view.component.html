@@ -1,0 +1,44 @@
+<button mat-raised-button color="primary" class="w-100 mb-2" [routerLink]="'../form'">
+  Dodaj uwagę
+</button>
+
+<mat-card *ngIf="notes === null">
+  Trwa ładowanie uwag
+</mat-card>
+
+<mat-card *ngIf="notes?.length === 0">
+  Brak wpisanych uwag
+</mat-card>
+
+<div class="row">
+  <div class="col-md-6 mb-2" *ngFor="let note of notes">
+    <mat-card>
+      <div class="row">
+        <strong class="col-6">Uczeń</strong>
+        <span class="col-6">
+          <ng-container *ngFor="let student of students">
+            <ng-container *ngIf="student.id === note.studentId">
+              {{ student.name }} {{ student.surname }}
+            </ng-container>
+          </ng-container>
+        </span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Treść</strong>
+        <span class="col-6">{{ note.content }}</span>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button mat-stroked-button color="primary" class="w-100" [routerLink]="'../'+note.id+'/form'">
+            Edytuj
+          </button>
+        </div>
+        <div class="col-6">
+          <button mat-stroked-button color="warn" class="w-100" (click)="onNoteDeleteButtonClick(note)">
+            Usuń
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
