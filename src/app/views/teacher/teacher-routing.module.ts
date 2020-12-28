@@ -15,6 +15,8 @@ import {LessonsFormResolver} from './lessons-form/lessons-form.resolver';
 import {NotesViewComponent} from './notes-view/notes-view.component';
 import {NotesFormComponent} from './notes-form/notes-form.component';
 import {NotesFormResolver} from './notes-form/notes-form.resolver';
+import {StudentsViewComponent} from './students-view/students-view.component';
+import {StudentsDetailsComponent} from './students-details/students-details.component';
 
 const routes: Routes = [
   {
@@ -82,6 +84,17 @@ const routes: Routes = [
               data: NotesFormResolver,
             }
           },
+        ]
+      },
+      {
+        path: 'students', data: {
+          hiddenChildren: true,
+          displayName: 'Uczniowie',
+          description: 'Tutaj znajdują się informacje o stundetach'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'view'},
+          {path: 'view', component: StudentsViewComponent},
+          {path: 'view/:studentId', component: StudentsDetailsComponent},
         ]
       },
     ]

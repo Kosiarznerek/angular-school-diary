@@ -1,0 +1,25 @@
+<mat-card *ngIf="students === null">
+  Trwa ładowanie listy studentów
+</mat-card>
+
+<mat-card *ngIf="students?.length === 0">
+  Brak studentów w systemie
+</mat-card>
+
+<div class="row">
+  <div class="col-md-6 mb-2" *ngFor="let student of students">
+    <mat-card>
+      <div class="row">
+        <strong class="col-6">Imię</strong>
+        <span class="col-6">{{ student.name }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Nazwisko</strong>
+        <span class="col-6">{{ student.surname }}</span>
+      </div>
+      <button class="w-100" mat-stroked-button color="primary" [routerLink]="'./' + student.id">
+        Szczegóły
+      </button>
+    </mat-card>
+  </div>
+</div>

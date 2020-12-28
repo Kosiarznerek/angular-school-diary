@@ -1,0 +1,26 @@
+<button mat-raised-button color="primary" class="w-100 mb-2" [routerLink]="'../'">
+  Powrót
+</button>
+
+<mat-card *ngIf="details === null">
+  Trwa ładowanie szczegółów
+</mat-card>
+
+<mat-card *ngIf="details !== null">
+  <div class="row">
+    <strong class="col-6">Imię</strong>
+    <span class="col-6">{{ details.name }}</span>
+  </div>
+  <div class="row">
+    <strong class="col-6">Nazwisko</strong>
+    <span class="col-6">{{ details.surname }}</span>
+  </div>
+  <div class="row">
+    <strong class="col-6">Adres</strong>
+    <span class="col-6">{{ details.address }}</span>
+  </div>
+  <div class="row">
+    <strong class="col-6">Telefon</strong>
+    <span class="col-6">{{ details.phone }}</span>
+  </div>
+</mat-card>

@@ -14,6 +14,8 @@ import {LessonsDetailsComponent} from './lessons-details/lessons-details.compone
 import {LessonsFormComponent} from './lessons-form/lessons-form.component';
 import {NotesViewComponent} from './notes-view/notes-view.component';
 import {NotesFormComponent} from './notes-form/notes-form.component';
+import {StudentsViewComponent} from './students-view/students-view.component';
+import {StudentsDetailsComponent} from './students-details/students-details.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import {NotesFormComponent} from './notes-form/notes-form.component';
     LessonsFormComponent,
     NotesViewComponent,
     NotesFormComponent,
+    StudentsViewComponent,
+    StudentsDetailsComponent,
   ],
   imports: [
     CommonModule,
