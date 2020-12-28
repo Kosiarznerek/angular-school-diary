@@ -16,6 +16,8 @@ import {NotesViewComponent} from './notes-view/notes-view.component';
 import {NotesFormComponent} from './notes-form/notes-form.component';
 import {StudentsViewComponent} from './students-view/students-view.component';
 import {StudentsDetailsComponent} from './students-details/students-details.component';
+import {ScheduleClassesComponent} from './schedule-classes/schedule-classes.component';
+import {ScheduleViewComponent} from './schedule-view/schedule-view.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {StudentsDetailsComponent} from './students-details/students-details.comp
     NotesFormComponent,
     StudentsViewComponent,
     StudentsDetailsComponent,
+    ScheduleClassesComponent,
+    ScheduleViewComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,11 @@
+<mat-card *ngIf="teacherClasses === null">
+  Trwa ładowanie klas
+</mat-card>
+
+<mat-card *ngIf="teacherClasses?.length === 0">
+  Brak dostępnych klas
+</mat-card>
+
+<mat-card *ngFor="let classData of teacherClasses" class="class-data" [routerLink]="'./' + classData.id">
+  {{ classData.year }}{{ classData.symbol }}
+</mat-card>

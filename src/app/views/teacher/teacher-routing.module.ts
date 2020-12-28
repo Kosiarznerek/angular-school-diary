@@ -17,6 +17,8 @@ import {NotesFormComponent} from './notes-form/notes-form.component';
 import {NotesFormResolver} from './notes-form/notes-form.resolver';
 import {StudentsViewComponent} from './students-view/students-view.component';
 import {StudentsDetailsComponent} from './students-details/students-details.component';
+import {ScheduleClassesComponent} from './schedule-classes/schedule-classes.component';
+import {ScheduleViewComponent} from './schedule-view/schedule-view.component';
 
 const routes: Routes = [
   {
@@ -95,6 +97,17 @@ const routes: Routes = [
           {path: '', pathMatch: 'full', redirectTo: 'view'},
           {path: 'view', component: StudentsViewComponent},
           {path: 'view/:studentId', component: StudentsDetailsComponent},
+        ]
+      },
+      {
+        path: 'schedule', data: {
+          hiddenChildren: true,
+          displayName: 'Plan zajęć',
+          description: 'Tutaj znajduje się plan zajeć w poszczególnych klasach'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'classes'},
+          {path: 'classes', component: ScheduleClassesComponent},
+          {path: 'classes/:classId', component: ScheduleViewComponent},
         ]
       },
     ]
