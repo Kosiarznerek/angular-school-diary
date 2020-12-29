@@ -18,6 +18,8 @@ import {StudentsViewComponent} from './students-view/students-view.component';
 import {StudentsDetailsComponent} from './students-details/students-details.component';
 import {ScheduleClassesComponent} from './schedule-classes/schedule-classes.component';
 import {ScheduleViewComponent} from './schedule-view/schedule-view.component';
+import {EventsViewComponent} from './events-view/events-view.component';
+import {EventsFormComponent} from './events-form/events-form.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {ScheduleViewComponent} from './schedule-view/schedule-view.component';
     StudentsDetailsComponent,
     ScheduleClassesComponent,
     ScheduleViewComponent,
+    EventsViewComponent,
+    EventsFormComponent,
   ],
   imports: [
     CommonModule,

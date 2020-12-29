@@ -19,6 +19,9 @@ import {StudentsViewComponent} from './students-view/students-view.component';
 import {StudentsDetailsComponent} from './students-details/students-details.component';
 import {ScheduleClassesComponent} from './schedule-classes/schedule-classes.component';
 import {ScheduleViewComponent} from './schedule-view/schedule-view.component';
+import {EventsViewComponent} from './events-view/events-view.component';
+import {EventsFormComponent} from './events-form/events-form.component';
+import {EventsFormResolver} from './events-form/events-form.resolver';
 
 const routes: Routes = [
   {
@@ -108,6 +111,26 @@ const routes: Routes = [
           {path: '', pathMatch: 'full', redirectTo: 'classes'},
           {path: 'classes', component: ScheduleClassesComponent},
           {path: 'classes/:classId', component: ScheduleViewComponent},
+        ]
+      },
+      {
+        path: 'events', data: {
+          hiddenChildren: true,
+          displayName: 'Wydarzenia',
+          description: 'Tutaj możesz zarządzać wydarzeniami klas'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'view'},
+          {path: 'view', component: EventsViewComponent},
+          {
+            path: 'form', component: EventsFormComponent, resolve: {
+              data: EventsFormResolver,
+            }
+          },
+          {
+            path: ':eventId/form', component: EventsFormComponent, resolve: {
+              data: EventsFormResolver,
+            }
+          },
         ]
       },
     ]

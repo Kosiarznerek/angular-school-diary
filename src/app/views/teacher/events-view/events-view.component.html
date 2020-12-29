@@ -1,0 +1,73 @@
+<button mat-raised-button color="primary" class="w-100 mb-2" [routerLink]="'../form'">
+  Dodaj wydarzenie
+</button>
+
+<mat-card *ngIf="events === null">
+  Trwa ładowanie wydarzeń
+</mat-card>
+
+<mat-card *ngIf="events?.length === 0">
+  Brak stworzonych wydarzeń
+</mat-card>
+
+<div class="row">
+  <div class="col-md-6 mb-2" *ngFor="let event of events">
+    <mat-card>
+      <div class="row">
+        <strong class="col-6">Klasa</strong>
+        <span class="col-6">
+          <ng-container *ngFor="let cls of classes">
+            <ng-container *ngIf="cls.id === event.classId">
+              {{ cls.year }}{{ cls.symbol }}
+            </ng-container>
+          </ng-container>
+        </span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Data</strong>
+        <span class="col-6">{{ event.date }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Opis</strong>
+        <span class="col-6">{{ event.description }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Typ</strong>
+        <span class="col-6">
+          <ng-container [ngSwitch]="event.type">
+            <ng-container *ngSwitchCase="'Test'">Test</ng-container>
+            <ng-container *ngSwitchCase="'Card'">Kartówka</ng-container>
+            <ng-container *ngSwitchCase="'Interview'">Wywiad</ng-container>
+            <ng-container *ngSwitchCase="'Trip'">Wycieczka</ng-container>
+            <ng-container *ngSwitchCase="'ClassCanceled'">Zajęcia odwołane</ng-container>
+            <ng-container *ngSwitchCase="'Substitute'">Zastępstwo</ng-container>
+            <ng-container *ngSwitchDefault>nieznany</ng-container>
+          </ng-container>
+        </span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Priorytet</strong>
+        <span class="col-6">
+          <ng-container [ngSwitch]="event.priority">
+            <ng-container *ngSwitchCase="'Low'">Niski</ng-container>
+            <ng-container *ngSwitchCase="'Medium'">Średni</ng-container>
+            <ng-container *ngSwitchCase="'High'">Wysoki</ng-container>
+            <ng-container *ngSwitchDefault>nieznany</ng-container>
+          </ng-container>
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button mat-stroked-button color="primary" class="w-100" [routerLink]="'../' + event.id + '/form'">
+            Edytuj
+          </button>
+        </div>
+        <div class="col-6">
+          <button mat-stroked-button color="warn" class="w-100" (click)="onEventRemoveButtonClick(event)">
+            Usuń
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

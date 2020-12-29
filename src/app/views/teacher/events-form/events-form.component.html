@@ -1,0 +1,66 @@
+<button mat-raised-button color="primary" class="w-100 mb-2" [routerLink]="this.isEditMode ? '../../view' : '../view'">
+  Powrót
+</button>
+
+<ng-container [formGroup]="eventForm">
+  <mat-form-field class="w-100">
+    <mat-label>Klasa</mat-label>
+    <mat-select [formControlName]="'classId'">
+      <mat-option *ngFor="let symbol of classes" [value]="symbol.id">
+        {{ symbol.year }}{{ symbol.symbol }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="eventForm" [controlName]="'classId'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Data wydarzenia</mat-label>
+    <input matInput [autocomplete]="'off'" type="date" [formControlName]="'date'"
+           placeholder="Wpisz datę wydarzenia">
+    <mat-error>
+      <app-form-errors [form]="eventForm" [controlName]="'date'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Opis wydarzenia</mat-label>
+    <input matInput [autocomplete]="'off'" type="text" [formControlName]="'description'"
+           placeholder="Wpisz opis wydarzenia">
+    <mat-error>
+      <app-form-errors [form]="eventForm" [controlName]="'description'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Typ wydarzenia</mat-label>
+    <mat-select [formControlName]="'type'">
+      <mat-option [value]="'Test'">Test</mat-option>
+      <mat-option [value]="'Card'">Kartówka</mat-option>
+      <mat-option [value]="'Interview'">Wywiad</mat-option>
+      <mat-option [value]="'Trip'">Wycieczka</mat-option>
+      <mat-option [value]="'ClassCanceled'">Zajęcia odwołane</mat-option>
+      <mat-option [value]="'Substitute'">Zastępstwo</mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="eventForm" [controlName]="'type'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Priorytet wydarzenia</mat-label>
+    <mat-select [formControlName]="'priority'">
+      <mat-option [value]="'Low'">Niski</mat-option>
+      <mat-option [value]="'Medium'">Średni</mat-option>
+      <mat-option [value]="'High'">Wysoki</mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="eventForm" [controlName]="'priority'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+</ng-container>
+
+<button mat-raised-button color="primary" class="w-100" [disabled]="eventForm.invalid" (click)="onSaveButtonClick()">
+  Zapisz
+</button>
