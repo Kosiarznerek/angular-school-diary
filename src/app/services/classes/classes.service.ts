@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {IClass, IPerson} from './classes.service.models';
-import {catchError, delay} from 'rxjs/operators';
+import {IClass, IClassInformation, IPerson} from './classes.service.models';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -107,6 +107,28 @@ export class ClassesService {
       catchError(() => of(false))
     );
     // return of(true).pipe(
+    //   delay(500)
+    // );
+  }
+
+  public getStudentClassInformation(studentId: number): Observable<IClassInformation> {
+    return this.httpClient.get<number>(`/api/classes/student/${studentId}`).pipe(
+      switchMap(classId => this.getAll().pipe(
+        map(allClasses => allClasses.find(c => c.id === classId)),
+        map(classData => ({
+          year: classData.year,
+          symbol: classData.symbol,
+          teacherName: classData.tutor.name,
+          teacherSurname: classData.tutor.surname
+        }))
+      )),
+    );
+    // return of({
+    //   year: Math.floor(Math.random() * 8) + 1,
+    //   symbol: 'A',
+    //   teacherName: 'Jan',
+    //   teacherSurname: 'Kowalski'
+    // }).pipe(
     //   delay(500)
     // );
   }

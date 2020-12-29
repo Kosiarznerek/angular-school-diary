@@ -11,3 +11,10 @@ export interface IPerson {
   name: string;
   surname: string;
 }
+
+export interface IClassInformation {
+  year: number;
+  symbol: string;
+  teacherName: string;
+  teacherSurname: string;
+}

@@ -1,0 +1,21 @@
+<mat-card *ngIf="classInformation === null">
+  Trwa ładowanie informacji o klasie
+</mat-card>
+
+<ng-container *ngIf="classInformation !== null">
+
+  <mat-card class="mb-2">
+    <div class="row">
+      <strong class="col-6">Klasa</strong>
+      <span>{{ classInformation.year }}{{ classInformation.symbol }}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="mb-2">
+    <div class="row">
+      <strong class="col-6">Wychowawca</strong>
+      <span>{{ classInformation.teacherName }} {{ classInformation.teacherSurname }}</span>
+    </div>
+  </mat-card>
+
+</ng-container>
