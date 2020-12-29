@@ -4,6 +4,7 @@ import {SignInService} from '../../services/sign-in/sign-in.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ISignInCredentials} from '../../services/sign-in/sign-in.service.models';
 import {Router} from '@angular/router';
+import {AuthenticationGuard} from '../../authentication/authentication.guard';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,6 +20,7 @@ export class SignInComponent implements OnInit {
     private readonly signInService: SignInService,
     private readonly matSnackBar: MatSnackBar,
     private readonly router: Router,
+    private readonly authenticationGuard: AuthenticationGuard,
   ) {
 
     const signInForm: Record<keyof ISignInCredentials, any> = {
@@ -43,7 +45,9 @@ export class SignInComponent implements OnInit {
     this.signInForm.enable();
 
     if (isSuccess) {
-      await this.router.navigate([model.type]);
+      await this.router.navigate([model.type === 'student'
+        ? `student/${this.authenticationGuard.credentials.detailsId}`
+        : model.type]);
     } else {
       this.matSnackBar.open('Błąd podczas logowania.');
     }

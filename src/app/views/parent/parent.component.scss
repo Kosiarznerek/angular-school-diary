@@ -1,0 +1,13 @@
+mat-card {
+  text-align: center;
+}
+
+mat-card.child {
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+}
+
+
+mat-card.child:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

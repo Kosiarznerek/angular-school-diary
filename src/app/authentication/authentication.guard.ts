@@ -25,7 +25,7 @@ export class AuthenticationGuard implements CanActivate {
     if (state.url.startsWith('/administrator')) {
       return this.credentials?.type === 'administrator';
     } else if (state.url.startsWith('/student')) {
-      return this.credentials?.type === 'student';
+      return this.credentials?.type === 'student' || this.credentials?.type === 'parent';
     } else if (state.url.startsWith('/parent')) {
       return this.credentials?.type === 'parent';
     } else if (state.url.startsWith('/teacher')) {

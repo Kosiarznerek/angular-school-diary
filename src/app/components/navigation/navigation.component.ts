@@ -42,7 +42,7 @@ export class NavigationComponent implements OnInit {
       .flat(Infinity)
       .map((v: UrlSegment): string => v.path)
       .filter(v => v !== '')
-      .join()
+      .join('/')
     )).toPromise();
 
     this.menuItems.push(...NavigationComponent.toMenuItems(

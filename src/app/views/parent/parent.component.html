@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-12">
+      <button mat-raised-button color="primary" class="w-100" (click)="onSignOnButtonClick()">
+        Wyloguj
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h1>Wybierz dziecko</h1>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="children === null">
+    <div class="col-12">
+      <mat-card>Trwa ładowanie danych</mat-card>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="children?.length === 0">
+    <div class="col-12">
+      <mat-card>Brak przypisanych dzieci</mat-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-2" *ngFor="let child of children">
+      <mat-card class="child" [routerLink]="'../student/' + child.studentId">
+        {{ child.name }} {{ child.surname }}
+      </mat-card>
+    </div>
+  </div>
+
+
+</div>

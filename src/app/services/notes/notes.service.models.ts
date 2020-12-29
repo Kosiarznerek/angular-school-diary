@@ -10,3 +10,10 @@ export interface INote {
   teacherId: number;
   content: string;
 }
+
+export interface INoteDetails {
+  id: number;
+  teacherName: string;
+  teacherSurname: string;
+  content: string;
+}

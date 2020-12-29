@@ -8,6 +8,7 @@ import {SignInComponent} from './views/sign-in/sign-in.component';
 import {NotFoundComponent} from './views/not-found/not-found.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NavigationComponent} from './components/navigation/navigation.component';
+import {ParentComponent} from './views/parent/parent.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AppSharedModule} from './app.shared.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -19,6 +20,7 @@ import {AuthenticationInterceptor} from './authentication/authentication.interce
     SignInComponent,
     NotFoundComponent,
     NavigationComponent,
+    ParentComponent,
     DashboardComponent,
   ],
   imports: [

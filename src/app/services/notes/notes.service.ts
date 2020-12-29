@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {INote, IStudent} from './notes.service.models';
-import {catchError, delay} from 'rxjs/operators';
+import {INote, INoteDetails, IStudent} from './notes.service.models';
+import {catchError} from 'rxjs/operators';
 import {AuthenticationGuard} from '../../authentication/authentication.guard';
 import {HttpClient} from '@angular/common/http';
 
@@ -72,14 +72,29 @@ export class NotesService {
   }
 
   public getOne(nodeId: number): Observable<INote> {
-    return of({
-      id: nodeId,
-      teacherId: this.authenticationGuard.credentials.detailsId,
-      studentId: Math.floor(Math.random() * 10) + 1,
-      content: 'Note content'
-    }).pipe(
-      delay(500)
+    return this.httpClient.get<INote>('/api/notes/' + nodeId);
+    // return of({
+    //   id: nodeId,
+    //   teacherId: this.authenticationGuard.credentials.detailsId,
+    //   studentId: Math.floor(Math.random() * 10) + 1,
+    //   content: 'Note content'
+    // }).pipe(
+    //   delay(500)
+    // );
+  }
+
+  public getStudentNotes(studentId): Observable<INoteDetails[]> {
+    return this.httpClient.get<INoteDetails[]>('/api/notes/students/' + studentId).pipe(
+      catchError(() => of([]))
     );
+    // return of(new Array(10).fill(0).map((v, i) => ({
+    //   id: i + 1,
+    //   teacherName: `teacherName${i + 1}`,
+    //   teacherSurname: `teacherSurname${i + 1}`,
+    //   content: `content${i + 1}`,
+    // }))).pipe(
+    //   delay(500)
+    // );
   }
 
 }
