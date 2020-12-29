@@ -1,0 +1,57 @@
+<mat-card *ngIf="attendances === null">
+  Trwa ładowanie danych
+</mat-card>
+
+<mat-card *ngIf="attendances?.length === 0">
+  Uczeń nie jest zapisany na żadne przedmioty
+</mat-card>
+
+<ng-container *ngFor="let subject of attendances" class="mb-2">
+
+  <mat-card class="mb-2">
+    <div class="row">
+      <div class="col-6">
+        <h2>
+          Przedmiot:
+          {{ subject.subjectName }}
+          (
+          <ng-container [ngSwitch]="subject.subjectProfile">
+            <ng-container *ngSwitchCase="'Basic'">podstawowy</ng-container>
+            <ng-container *ngSwitchCase="'Advanced'">zaawansowany</ng-container>
+            <ng-container *ngSwitchDefault>nieznany</ng-container>
+          </ng-container>
+          )
+        </h2>
+      </div>
+      <div class="col-6">
+        <h2>
+          Prowadzący:
+          {{ subject.teacherName }} {{ subject.teacherSurname }}
+        </h2>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="subject.lessons.length === 0" class="mb-2">
+    Zajęcia z tego przedmiotu jeszcze się nie odbyły
+  </mat-card>
+
+  <mat-card *ngFor="let lesson of subject.lessons" class="mb-2">
+    <div class="row">
+      <strong class="col-6">Data zajęć</strong>
+      <span class="col-6">{{ lesson.date }}</span>
+    </div>
+    <div class="row">
+      <strong class="col-6">Temat zajęć</strong>
+      <span class="col-6">{{ lesson.topic }}</span>
+    </div>
+    <div class="row">
+      <strong class="col-6">Obecny</strong>
+      <span class="col-6">{{ lesson.isPresent ? 'Tak' : 'Nie' }}</span>
+    </div>
+  </mat-card>
+
+  <div class="mb-5"></div>
+
+</ng-container>
+

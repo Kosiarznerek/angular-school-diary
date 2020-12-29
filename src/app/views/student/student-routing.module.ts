@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {NavigationComponent} from '../../components/navigation/navigation.component';
 import {NotesComponent} from './notes/notes.component';
 import {InformationComponent} from './information/information.component';
+import {AttendanceComponent} from './attendance/attendance.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,12 @@ const routes: Routes = [
         path: 'information', component: InformationComponent, data: {
           displayName: 'Informacje o klasie',
           description: 'Tutaj znajdują się informacje o klasie studenta'
+        }
+      },
+      {
+        path: 'attendance', component: AttendanceComponent, data: {
+          displayName: 'Frekwencja',
+          description: 'Tutaj znajdują się frekwencja studenta'
         }
       }
     ]
