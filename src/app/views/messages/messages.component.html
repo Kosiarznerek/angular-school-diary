@@ -1,0 +1,43 @@
+<button mat-raised-button color="primary" [routerLink]="'../send'" class="mb-2 w-100">
+  Wyślij wiadomość
+</button>
+
+<mat-card *ngIf="messages === null">
+  Trwa ładowanie wiadomości
+</mat-card>
+
+<mat-card *ngIf="messages?.length === 0">
+  Brak otrzymanych wiadomości
+</mat-card>
+
+<mat-card *ngFor="let message of messages" class="mb-2">
+  <div class="row">
+    <strong class="col-6">Nadawca wiadomości</strong>
+    <span class="col-6">
+      <ng-container *ngFor="let user of users">
+        <ng-container *ngIf="user.id === message.userId">
+          {{ user.name }} {{ user.surname }}
+          (<ng-container [ngSwitch]="user.accountType">
+            <ng-container *ngSwitchCase="'student'">uczeń</ng-container>
+            <ng-container *ngSwitchCase="'parent'">rodzic</ng-container>
+            <ng-container *ngSwitchCase="'teacher'">nauczyciel</ng-container>
+            <ng-container *ngSwitchCase="'administrator'">administrator</ng-container>
+            <ng-container *ngSwitchDefault>nieznany typ konta</ng-container>
+          </ng-container>)
+        </ng-container>
+      </ng-container>
+    </span>
+  </div>
+  <div class="row">
+    <strong class="col-6">Data wysłania</strong>
+    <span class="col-6">{{ message.date | date: 'd/M/yy' }}</span>
+  </div>
+  <div class="row">
+    <strong class="col-6">Temat wiadomości</strong>
+    <span class="col-6">{{ message.topic }}</span>
+  </div>
+  <div class="row">
+    <strong class="col-6">Treść wiadomości</strong>
+    <span class="col-6">{{ message.content }}</span>
+  </div>
+</mat-card>

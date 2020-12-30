@@ -1,0 +1,54 @@
+<button mat-raised-button color="primary" [routerLink]="'../view'" class="mb-2 w-100">
+  Powrót
+</button>
+
+<ng-container [formGroup]="messageForm">
+
+  <mat-form-field class="w-100">
+    <mat-select [formControlName]="'userId'" [multiple]="false" placeholder="Wybierz odbiorcę">
+      <mat-option>
+        <ngx-mat-select-search [formControl]="usersFilterControl"
+                               [placeholderLabel]="'Szukaj'" [noEntriesFoundLabel]="'Brak rezultatów'"
+                               [indexAndLengthScreenReaderText]="' z '">
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let user of filteredUsers | async" [value]="user.id">
+        {{ user.name }} {{ user.surname }}
+        (
+        <ng-container [ngSwitch]="user.accountType">
+          <ng-container *ngSwitchCase="'student'">uczeń</ng-container>
+          <ng-container *ngSwitchCase="'parent'">rodzic</ng-container>
+          <ng-container *ngSwitchCase="'teacher'">nauczyciel</ng-container>
+          <ng-container *ngSwitchCase="'administrator'">administrator</ng-container>
+          <ng-container *ngSwitchDefault>nieznany typ konta</ng-container>
+        </ng-container>
+        )
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-errors [form]="messageForm" [controlName]="'userId'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Temat wiadomości</mat-label>
+    <input matInput [autocomplete]="'off'" type="text" [formControlName]="'topic'" placeholder="Wpisz temat">
+    <mat-error>
+      <app-form-errors [form]="messageForm" [controlName]="'topic'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Treść wiadomości</mat-label>
+    <textarea matInput [formControlName]="'content'" placeholder="Wpisz treść wiadomości"></textarea>
+    <mat-error>
+      <app-form-errors [form]="messageForm" [controlName]="'content'"></app-form-errors>
+    </mat-error>
+  </mat-form-field>
+
+</ng-container>
+
+<button mat-raised-button color="primary" class="w-100 mt-1" (click)="onMessageSendButtonClick()"
+        [disabled]="messageForm.invalid">
+  Wyślij wiadomość
+</button>

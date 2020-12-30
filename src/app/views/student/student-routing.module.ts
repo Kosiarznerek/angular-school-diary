@@ -7,6 +7,9 @@ import {AttendanceComponent} from './attendance/attendance.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {MarksComponent} from './marks/marks.component';
 import {EventsComponent} from './events/events.component';
+import {MessagesComponent} from '../messages/messages.component';
+import {MessagesSendComponent} from '../messages-send/messages-send.component';
+import {MessagesSendResolver} from '../messages-send/messages-send.resolver';
 
 const routes: Routes = [
   {
@@ -46,7 +49,22 @@ const routes: Routes = [
           displayName: 'Wydarzenia',
           description: 'Tutaj znajdują się wydarzenia klasy studenta'
         }
-      }
+      },
+      {
+        path: 'messages', data: {
+          hiddenChildren: true,
+          displayName: 'Komunikator',
+          description: 'Tutaj znajdują się twoje wiadomości'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'view'},
+          {path: 'view', component: MessagesComponent},
+          {
+            path: 'send', component: MessagesSendComponent, resolve: {
+              data: MessagesSendResolver,
+            }
+          },
+        ]
+      },
     ]
   }
 ];

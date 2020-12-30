@@ -22,6 +22,9 @@ import {ScheduleViewComponent} from './schedule-view/schedule-view.component';
 import {EventsViewComponent} from './events-view/events-view.component';
 import {EventsFormComponent} from './events-form/events-form.component';
 import {EventsFormResolver} from './events-form/events-form.resolver';
+import {MessagesComponent} from '../messages/messages.component';
+import {MessagesSendComponent} from '../messages-send/messages-send.component';
+import {MessagesSendResolver} from '../messages-send/messages-send.resolver';
 
 const routes: Routes = [
   {
@@ -129,6 +132,21 @@ const routes: Routes = [
           {
             path: ':eventId/form', component: EventsFormComponent, resolve: {
               data: EventsFormResolver,
+            }
+          },
+        ]
+      },
+      {
+        path: 'messages', data: {
+          hiddenChildren: true,
+          displayName: 'Komunikator',
+          description: 'Tutaj znajdują się twoje wiadomości'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'view'},
+          {path: 'view', component: MessagesComponent},
+          {
+            path: 'send', component: MessagesSendComponent, resolve: {
+              data: MessagesSendResolver,
             }
           },
         ]

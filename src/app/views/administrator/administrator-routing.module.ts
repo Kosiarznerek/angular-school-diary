@@ -17,6 +17,9 @@ import {SchedulesClassesComponent} from './schedules-classes/schedules-classes.c
 import {SchedulesViewComponent} from './schedules-view/schedules-view.component';
 import {SchedulesFormComponent} from './schedules-form/schedules-form.component';
 import {SchedulesFormResolver} from './schedules-form/schedules-form.resolver';
+import {MessagesComponent} from '../messages/messages.component';
+import {MessagesSendComponent} from '../messages-send/messages-send.component';
+import {MessagesSendResolver} from '../messages-send/messages-send.resolver';
 
 const routes: Routes = [
   {
@@ -110,6 +113,21 @@ const routes: Routes = [
                 }
               },
             ]
+          },
+        ]
+      },
+      {
+        path: 'messages', data: {
+          hiddenChildren: true,
+          displayName: 'Komunikator',
+          description: 'Tutaj znajdują się twoje wiadomości'
+        }, children: [
+          {path: '', pathMatch: 'full', redirectTo: 'view'},
+          {path: 'view', component: MessagesComponent},
+          {
+            path: 'send', component: MessagesSendComponent, resolve: {
+              data: MessagesSendResolver,
+            }
           },
         ]
       },

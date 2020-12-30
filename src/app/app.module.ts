@@ -13,6 +13,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AppSharedModule} from './app.shared.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthenticationInterceptor} from './authentication/authentication.interceptor';
+import {MessagesComponent} from './views/messages/messages.component';
+import {MessagesSendComponent} from './views/messages-send/messages-send.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import {AuthenticationInterceptor} from './authentication/authentication.interce
     NavigationComponent,
     ParentComponent,
     DashboardComponent,
+    MessagesComponent,
+    MessagesSendComponent,
   ],
   imports: [
     AppSharedModule,
