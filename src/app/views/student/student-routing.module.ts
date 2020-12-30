@@ -4,6 +4,7 @@ import {NavigationComponent} from '../../components/navigation/navigation.compon
 import {NotesComponent} from './notes/notes.component';
 import {InformationComponent} from './information/information.component';
 import {AttendanceComponent} from './attendance/attendance.component';
+import {ScheduleComponent} from './schedule/schedule.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,12 @@ const routes: Routes = [
         path: 'attendance', component: AttendanceComponent, data: {
           displayName: 'Frekwencja',
           description: 'Tutaj znajdują się frekwencja studenta'
+        }
+      },
+      {
+        path: 'schedule', component: ScheduleComponent, data: {
+          displayName: 'Plan zajęć',
+          description: 'Tutaj znajdują się plan zajęć studenta'
         }
       }
     ]

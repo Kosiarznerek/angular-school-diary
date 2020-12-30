@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ISchedule, ITeacherSubject} from './schedules.service.models';
-import {catchError} from 'rxjs/operators';
+import {catchError, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -52,6 +52,13 @@ export class SchedulesService {
     // }))).pipe(
     //   delay(500)
     // );
+  }
+
+  public getStudentSchedule(studentId: number): Observable<ISchedule[]> {
+    return this.httpClient.get<number>(`/api/classes/student/${studentId}`).pipe(
+      switchMap(classId => this.getAll(classId)),
+      catchError(() => of([]))
+    );
   }
 
   public getOne(scheduleId: number): Observable<ISchedule> {

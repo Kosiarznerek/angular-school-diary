@@ -5,9 +5,10 @@ import {AppSharedModule} from '../../app.shared.module';
 import {NotesComponent} from './notes/notes.component';
 import {InformationComponent} from './information/information.component';
 import {AttendanceComponent} from './attendance/attendance.component';
+import {ScheduleComponent} from './schedule/schedule.component';
 
 @NgModule({
-  declarations: [NotesComponent, InformationComponent, AttendanceComponent],
+  declarations: [NotesComponent, InformationComponent, AttendanceComponent, ScheduleComponent],
   imports: [
     CommonModule,
     AppSharedModule,

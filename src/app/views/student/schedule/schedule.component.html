@@ -1,0 +1,137 @@
+<mat-card *ngIf="schedules === null">
+  Trwa ładowanie planów zajęć
+</mat-card>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Monday')?.length > 0">
+  <h2>Poniedziałek</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Monday')?.length === 0">
+  <h2>Brak zajęć w poniedziałek</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Monday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+<hr/>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Tuesday')?.length > 0">
+  <h2>Wtorek</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Tuesday')?.length === 0">
+  <h2>Brak zajęć we wtorek</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Tuesday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+<hr/>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Wednesday')?.length > 0">
+  <h2>Środa</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Wednesday')?.length === 0">
+  <h2>Brak zajęć w środę</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Wednesday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+<hr/>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Thursday')?.length > 0">
+  <h2>Czwartek</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Thursday')?.length === 0">
+  <h2>Brak zajęć we czwartek</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Thursday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+<hr/>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Friday')?.length > 0">
+  <h2>Piątek</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Friday')?.length === 0">
+  <h2>Brak zajęć w piątek</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Friday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+<hr/>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Saturday')?.length > 0">
+  <h2>Sobota</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Saturday')?.length === 0">
+  <h2>Brak zajęć w sobotę</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Saturday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+<hr/>
+
+<mat-card *ngIf="schedulesForDayOfWeek('Sunday')?.length > 0">
+  <h2>Niedziela</h2>
+</mat-card>
+<mat-card *ngIf="schedulesForDayOfWeek('Sunday')?.length === 0">
+  <h2>Brak zajęć w niedziele</h2>
+</mat-card>
+<div>
+  <mat-card *ngFor="let schedule of schedulesForDayOfWeek('Sunday')" class="schedule">
+    <ng-container
+      *ngTemplateOutlet="scheduleTemplate; context: { schedule: schedule }">
+    </ng-container>
+  </mat-card>
+</div>
+
+<ng-template #scheduleTemplate let-schedule="schedule">
+  <div>
+    <strong>Przedmiot: </strong>
+    <span>
+      {{ schedule.subject.name }}
+      (<ng-container [ngSwitch]="schedule.subject.profile">
+        <ng-container *ngSwitchCase="'Basic'">podstawowy</ng-container>
+        <ng-container *ngSwitchCase="'Advanced'">rozszerzony</ng-container>
+        <ng-container *ngSwitchDefault>nieznany</ng-container>
+      </ng-container>)
+    </span>
+  </div>
+  <div>
+    <strong>Prowadzący</strong>
+    <span>{{ schedule.subject.teacherName }} {{ schedule.subject.teacherSurname }}</span>
+  </div>
+  <div>
+    <strong>Numer sali</strong>
+    <span>{{ schedule.roomNumber }}</span>
+  </div>
+  <div>
+    <strong>Godziny trwania</strong>
+    <span>{{ schedule.hourStart}} - {{ schedule.hourEnd }}</span>
+  </div>
+  <div>
+    <strong>Data trwania</strong>
+    <span>{{ schedule.dateStart}} - {{ schedule.dateEnd }}</span>
+  </div>
+</ng-template>
