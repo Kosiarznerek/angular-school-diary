@@ -6,6 +6,7 @@ import {InformationComponent} from './information/information.component';
 import {AttendanceComponent} from './attendance/attendance.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {MarksComponent} from './marks/marks.component';
+import {EventsComponent} from './events/events.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,12 @@ const routes: Routes = [
         path: 'marks', component: MarksComponent, data: {
           displayName: 'Oceny',
           description: 'Tutaj znajdują się oceny studenta'
+        }
+      },
+      {
+        path: 'events', component: EventsComponent, data: {
+          displayName: 'Wydarzenia',
+          description: 'Tutaj znajdują się wydarzenia klasy studenta'
         }
       }
     ]

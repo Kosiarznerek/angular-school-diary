@@ -1,0 +1,51 @@
+<mat-card *ngIf="events === null">
+  Trwa ładowanie wydarzeń
+</mat-card>
+
+<mat-card *ngIf="events?.length === 0">
+  Brak wydarzeń w klasie studenta
+</mat-card>
+
+<div class="row">
+  <div class="col-md-6 mb-2" *ngFor="let event of events">
+    <mat-card>
+      <div class="row">
+        <strong class="col-6">Nauczyciel</strong>
+        <span class="col-6">{{ event.teacherName }} {{ event.teacherSurname }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Data</strong>
+        <span class="col-6">{{ event.date }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Opis</strong>
+        <span class="col-6">{{ event.description }}</span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Typ</strong>
+        <span class="col-6">
+          <ng-container [ngSwitch]="event.type">
+            <ng-container *ngSwitchCase="'Test'">Test</ng-container>
+            <ng-container *ngSwitchCase="'Card'">Kartówka</ng-container>
+            <ng-container *ngSwitchCase="'Interview'">Wywiad</ng-container>
+            <ng-container *ngSwitchCase="'Trip'">Wycieczka</ng-container>
+            <ng-container *ngSwitchCase="'ClassCanceled'">Zajęcia odwołane</ng-container>
+            <ng-container *ngSwitchCase="'Substitute'">Zastępstwo</ng-container>
+            <ng-container *ngSwitchDefault>nieznany</ng-container>
+          </ng-container>
+        </span>
+      </div>
+      <div class="row">
+        <strong class="col-6">Priorytet</strong>
+        <span class="col-6">
+          <ng-container [ngSwitch]="event.priority">
+            <ng-container *ngSwitchCase="'Low'">Niski</ng-container>
+            <ng-container *ngSwitchCase="'Medium'">Średni</ng-container>
+            <ng-container *ngSwitchCase="'High'">Wysoki</ng-container>
+            <ng-container *ngSwitchDefault>nieznany</ng-container>
+          </ng-container>
+        </span>
+      </div>
+    </mat-card>
+  </div>
+</div>

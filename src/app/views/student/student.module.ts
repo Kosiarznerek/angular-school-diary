@@ -7,9 +7,17 @@ import {InformationComponent} from './information/information.component';
 import {AttendanceComponent} from './attendance/attendance.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {MarksComponent} from './marks/marks.component';
+import {EventsComponent} from './events/events.component';
 
 @NgModule({
-  declarations: [NotesComponent, InformationComponent, AttendanceComponent, ScheduleComponent, MarksComponent],
+  declarations: [
+    NotesComponent,
+    InformationComponent,
+    AttendanceComponent,
+    ScheduleComponent,
+    MarksComponent,
+    EventsComponent,
+  ],
   imports: [
     CommonModule,
     AppSharedModule,

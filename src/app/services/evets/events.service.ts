@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthenticationGuard} from '../../authentication/authentication.guard';
 import {Observable, of} from 'rxjs';
-import {IEvent} from './events.service.models';
+import {IEvent, IStudentEvent} from './events.service.models';
 import {catchError} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
@@ -96,6 +96,29 @@ export class EventsService {
       catchError(() => of(false))
     );
     // return of(true).pipe(
+    //   delay(500)
+    // );
+  }
+
+  public getStudentEvents(studentId: number): Observable<IStudentEvent[]> {
+    return this.httpClient.get<IStudentEvent[]>('/api/events/student/' + studentId).pipe(
+      catchError(() => of([]))
+    );
+    // return of(new Array(10).fill(10).map((v, i) => ({
+    //   teacherName: 'teacherName',
+    //   teacherSurname: 'teacherSurname',
+    //   date: '2020-02-20',
+    //   description: 'Random description',
+    //   type: ['Test',
+    //     'Card',
+    //     'Interview',
+    //     'Trip',
+    //     'ClassCanceled',
+    //     'Substitute'][Math.floor(Math.random() * 6)] as 'Card',
+    //   priority: ['Low',
+    //     'Medium',
+    //     'High'][Math.floor(Math.random() * 3)] as 'Low',
+    // }))).pipe(
     //   delay(500)
     // );
   }

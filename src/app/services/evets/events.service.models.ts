@@ -14,3 +14,19 @@ export interface IEvent {
     'Medium' |
     'High';
 }
+
+export interface IStudentEvent {
+  teacherName: string;
+  teacherSurname: string;
+  date: string;
+  description: string;
+  type: 'Test' |
+    'Card' |
+    'Interview' |
+    'Trip' |
+    'ClassCanceled' |
+    'Substitute';
+  priority: 'Low' |
+    'Medium' |
+    'High';
+}
