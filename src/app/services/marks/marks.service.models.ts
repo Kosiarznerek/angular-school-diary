@@ -43,3 +43,12 @@ export interface IStudentMark {
   weight: number;
   comment: string;
 }
+
+export interface ISubjectMark {
+  teacherSubjectId: number;
+  subjectName: string;
+  subjectProfile: 'Basic' | 'Advanced';
+  teacherName: string;
+  teacherSurname: string;
+  marks: IStudentMark[];
+}

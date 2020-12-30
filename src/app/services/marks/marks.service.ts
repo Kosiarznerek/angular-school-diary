@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {IClass, IMark, ISchedule, IStudentMark} from './marks.service.models';
-import {catchError, map} from 'rxjs/operators';
+import {IClass, IMark, ISchedule, IStudentMark, ISubjectMark} from './marks.service.models';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {AuthenticationGuard} from '../../authentication/authentication.guard';
+import {SchedulesService} from '../schedules/schedules.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class MarksService {
   constructor(
     private readonly httpClient: HttpClient,
     private readonly authenticationGuard: AuthenticationGuard,
+    private readonly schedulesService: SchedulesService,
   ) {
   }
 
@@ -108,6 +110,36 @@ export class MarksService {
       catchError(() => of(false))
     );
     // return of(true).pipe(
+    //   delay(500)
+    // );
+  }
+
+  public getStudentSubjectMarks(studentId: number): Observable<ISubjectMark[]> {
+    return this.httpClient.get<ISubjectMark[]>('/api/marks/student/' + studentId).pipe(
+      switchMap(studentMarks => this.schedulesService.getTeachersSubjects().pipe(
+        map(subjects => studentMarks.map(v => Object.assign(v, {
+          subjectName: subjects.find(q => q.id === v.teacherSubjectId).name,
+          subjectProfile: subjects.find(q => q.id === v.teacherSubjectId).profile,
+          teacherName: subjects.find(q => q.id === v.teacherSubjectId).teacherName,
+          teacherSurname: subjects.find(q => q.id === v.teacherSubjectId).teacherSurname,
+        })))
+      )),
+      catchError(() => of([]))
+    );
+    // return of(new Array(10).fill(0).map(() => ({
+    //   subjectName: 'subjectName',
+    //   subjectProfile: ['Basic', 'Advanced'][Math.floor(Math.random() * 2)] as 'Basic',
+    //   teacherName: 'teacherName',
+    //   teacherSurname: 'teacherSurname',
+    //   marks: new Array(4).fill(0).map((v, i) => ({
+    //     id: i + 1,
+    //     studentId: null,
+    //     scheduleId: null,
+    //     mark: Math.floor(Math.random() * 5) + 1,
+    //     weight: Math.floor(Math.random() * 2) + 1,
+    //     comment: 'Mark comment'
+    //   }))
+    // }))).pipe(
     //   delay(500)
     // );
   }

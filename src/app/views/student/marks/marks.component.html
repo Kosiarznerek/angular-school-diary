@@ -1,0 +1,60 @@
+<mat-card *ngIf="marks === null">
+  Trwa ładowanie ocen studenta
+</mat-card>
+
+<mat-card *ngIf="marks?.length === 0">
+  Student nie uczęszcza na żadne przedmioty
+</mat-card>
+
+<ng-container *ngFor="let subject of marks">
+
+  <mat-card class="mb-2">
+    <div class="row">
+      <div class="col-6">
+        <h2>
+          Przedmiot:
+          {{ subject.subjectName }}
+          (
+          <ng-container [ngSwitch]="subject.subjectProfile">
+            <ng-container *ngSwitchCase="'Basic'">podstawowy</ng-container>
+            <ng-container *ngSwitchCase="'Advanced'">zaawansowany</ng-container>
+            <ng-container *ngSwitchDefault>nieznany</ng-container>
+          </ng-container>
+          )
+        </h2>
+      </div>
+      <div class="col-6">
+        <h2>
+          Prowadzący:
+          {{ subject.teacherName }} {{ subject.teacherSurname }}
+        </h2>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="subject.marks.length === 0" class="mb-2">
+    Nie uzyskano jeszcze żadnych ocen z tego przedmiotu
+  </mat-card>
+
+  <div class="row">
+    <div class="col-md-6 mb-2" *ngFor="let mark of subject.marks">
+      <mat-card>
+        <div class="row">
+          <strong class="col-6">Ocena</strong>
+          <span class="col-6">{{ mark.mark}}</span>
+        </div>
+        <div class="row">
+          <strong class="col-6">Waga oceny</strong>
+          <span class="col-6">{{ mark.weight }}</span>
+        </div>
+        <div class="row">
+          <strong class="col-6">Komentarz</strong>
+          <span class="col-6">{{ mark.comment }}</span>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="mb-5"></div>
+
+</ng-container>

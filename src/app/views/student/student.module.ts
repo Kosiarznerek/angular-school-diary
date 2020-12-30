@@ -6,9 +6,10 @@ import {NotesComponent} from './notes/notes.component';
 import {InformationComponent} from './information/information.component';
 import {AttendanceComponent} from './attendance/attendance.component';
 import {ScheduleComponent} from './schedule/schedule.component';
+import {MarksComponent} from './marks/marks.component';
 
 @NgModule({
-  declarations: [NotesComponent, InformationComponent, AttendanceComponent, ScheduleComponent],
+  declarations: [NotesComponent, InformationComponent, AttendanceComponent, ScheduleComponent, MarksComponent],
   imports: [
     CommonModule,
     AppSharedModule,

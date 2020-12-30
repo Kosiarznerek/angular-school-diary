@@ -5,6 +5,7 @@ import {NotesComponent} from './notes/notes.component';
 import {InformationComponent} from './information/information.component';
 import {AttendanceComponent} from './attendance/attendance.component';
 import {ScheduleComponent} from './schedule/schedule.component';
+import {MarksComponent} from './marks/marks.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,12 @@ const routes: Routes = [
         path: 'schedule', component: ScheduleComponent, data: {
           displayName: 'Plan zajęć',
           description: 'Tutaj znajdują się plan zajęć studenta'
+        }
+      },
+      {
+        path: 'marks', component: MarksComponent, data: {
+          displayName: 'Oceny',
+          description: 'Tutaj znajdują się oceny studenta'
         }
       }
     ]
