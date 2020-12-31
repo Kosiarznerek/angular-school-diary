@@ -2,7 +2,11 @@
   Trwa ładowanie informacji o klasie
 </mat-card>
 
-<ng-container *ngIf="classInformation !== null">
+<mat-card *ngIf="classInformation === undefined">
+  Uczeń nie jest w żadnej klasie
+</mat-card>
+
+<ng-container *ngIf="classInformation !== null && classInformation !== undefined">
 
   <mat-card class="mb-2">
     <div class="row">

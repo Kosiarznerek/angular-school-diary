@@ -115,12 +115,15 @@ export class ClassesService {
     return this.httpClient.get<number>(`/api/classes/student/${studentId}`).pipe(
       switchMap(classId => this.getAll().pipe(
         map(allClasses => allClasses.find(c => c.id === classId)),
-        map(classData => ({
-          year: classData?.year ?? 0,
-          symbol: classData?.symbol ?? 'N/A',
-          teacherName: classData?.tutor.name ?? 'N/A',
-          teacherSurname: classData?.tutor.surname ?? 'N/A'
-        }))
+        map(classData => classData
+          ? {
+            year: classData.year,
+            symbol: classData.symbol,
+            teacherName: classData.tutor.name,
+            teacherSurname: classData.tutor.surname
+          }
+          : undefined
+        )
       )),
     );
     // return of({

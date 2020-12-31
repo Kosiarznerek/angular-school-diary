@@ -56,7 +56,7 @@ export class SchedulesService {
 
   public getStudentSchedule(studentId: number): Observable<ISchedule[]> {
     return this.httpClient.get<number>(`/api/classes/student/${studentId}`).pipe(
-      switchMap(classId => this.getAll(classId)),
+      switchMap(classId => classId ? this.getAll(classId) : of([])),
       catchError(() => of([]))
     );
   }
